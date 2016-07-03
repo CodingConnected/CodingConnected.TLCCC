@@ -45,9 +45,18 @@ static void BitmapperControlPaint(HWND hWnd, int fcmax, int dpmax)
 
 	for (int i = 0; i < CIF_PB_AANT_US_FC; i++)
 	{
-		if(CIF_GUS[i] < STATE_MAX)
-			SelectObject(memHdc, CGBrushes[CIF_GUS[i]]);
-		ExtFloodFill(memHdc, X_us[i], Y_us[i], 0x000000, FLOODFILLBORDER);
+		if (bInternalState)
+		{
+			if (Phases_internal_state[i] < STATE_MAX)
+				SelectObject(memHdc, CGBrushes[Phases_internal_state[i]]);
+			ExtFloodFill(memHdc, X_us[i], Y_us[i], 0x000000, FLOODFILLBORDER);
+		}
+		else
+		{
+			if (CIF_GUS[i] < STATE_OUT_MAX)
+				SelectObject(memHdc, CGBrushes_out[CIF_GUS[i]]);
+			ExtFloodFill(memHdc, X_us[i], Y_us[i], 0x000000, FLOODFILLBORDER);
+		}
 	}
 
 	for (int i = 0; i < CIF_PB_AANT_IS_D; i++)

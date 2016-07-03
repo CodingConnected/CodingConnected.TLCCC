@@ -138,7 +138,7 @@ void Phase_timers_update(PHASE * phase, CLOCK * clock)
 	}
 }
 
-void Phases_state_update(PHASE phases[], short phases_count, short * cif_guswijz)
+void Phases_state_update_ML(PHASE phases[], short phases_count, short * cif_guswijz)
 {
 	int i, j;
 	for (i = 0; i < phases_count; ++i)
@@ -153,9 +153,15 @@ void Phases_state_update(PHASE phases[], short phases_count, short * cif_guswijz
 				if (phases[i].ML_Primary && !phases[i].ML_Primary_done)
 				{
 					phases[i].CycleState = NEXTRED;
+					phases[i].ML_Primary_active = TRUE;
 					*cif_guswijz = TRUE;
 					// TODO: set start end states ---> ALSO BELOW...
 					break;
+				}
+				else if (phases[i].ML_Alternative)
+				{
+					phases[i].CycleState = NEXTRED;
+					*cif_guswijz = TRUE;
 				}
 			}
 			break;
@@ -191,6 +197,7 @@ void Phases_state_update(PHASE phases[], short phases_count, short * cif_guswijz
 			if (phases[i].Timer_GE.Ended || !phases[i].Extend)
 			{
 				phases[i].CycleState = FREEEXGREEN;
+				phases[i].ML_Primary_active = TRUE;
 				*cif_guswijz = TRUE;
 			}
 			break;
@@ -331,6 +338,7 @@ void Phases_requests(PHASE phases[], short phases_count)
 		if (phases[i].StartGreen)
 		{
 			phases[i].Request = FALSE;
+			phases[i].Timer_PG_act = 0;
 		}
 	}
 }

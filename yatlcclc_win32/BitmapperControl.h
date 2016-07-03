@@ -48,4 +48,10 @@ extern "C"
 }
 
 extern HBRUSH CGBrushes[];
+extern HBRUSH CGBrushes_out[STATE_OUT_MAX];
 extern struct IS_STRUCT * inputs;
+extern "C"
+{
+	extern short Phases_internal_state[];
+}
+extern char bInternalState;

@@ -80,6 +80,7 @@ void Timer_update(TIMER * timer, CLOCK * clock)
 		{
 			timer->Current += clock->TM;
 		}
+		timer->Remaining = timer->Maximum - timer->Current;
 	}
 	if (timer->Active && timer->Current >= timer->Maximum)
 	{

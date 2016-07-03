@@ -44,7 +44,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define fc38  13
 #define FCMAX 14
 
-#define USMAX FCMAX+0
+#define segm1 FCMAX+0
+#define segm2 FCMAX+1
+#define segm3 FCMAX+2
+#define segm4 FCMAX+3
+#define segm5 FCMAX+4
+#define segm6 FCMAX+5
+#define segm7 FCMAX+6
+#define USMAX FCMAX+7
 
 #define d01_1 0
 #define d01_2 1
@@ -96,5 +103,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_timer_func.h"
 #include "yatlcclc_modules_func.h"
 #include "yatlcclc_cif.h"
+
+/* Function declarations */
+void application_init(PHASE phases[], DETECTOR detectors[], short CT_max[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock);
 
 #endif // TLC_H_INCLUDED

@@ -35,6 +35,7 @@ extern "C"
 	#include "yatlcclc_main.h" /* Also include CIF_INC.h */
 }
 
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -52,6 +53,7 @@ HDC stretchedHdc;
 HBITMAP bufBMP;
 
 int iSpeed = 0;
+char bInternalState = TRUE;
 
 LPCSTR lpcsPicturePath;
 
@@ -61,6 +63,7 @@ HANDLE applThread = NULL;
 struct IS_STRUCT * inputs;
 
 HBRUSH CGBrushes[STATE_MAX];
+HBRUSH CGBrushes_out[STATE_OUT_MAX];
 
 HWND hWndBitmapper;
 HWND hWndToolbar;
@@ -299,7 +302,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		hWndBitmapper = CreateWindow(BITMAPPER_WC, NULL, WS_CHILD | WS_VISIBLE,
 			0, iBitmapY, Bitmap.bmWidth, Bitmap.bmHeight, hWnd, NULL, hInst, NULL);
-
 
 		/* Get the sizes of the system font, for formatting */
 		hdc = GetDC(hWnd);

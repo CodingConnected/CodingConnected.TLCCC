@@ -27,5 +27,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 void Parameter_init(PARAMETER * parameter, const char * code, short type, short setting)
 {
+	parameter->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
+	snprintf(parameter->Code, strlen(code) + 1, "%s", code);
 
+	parameter->TimeType = type;
+	parameter->Setting = setting;
 }

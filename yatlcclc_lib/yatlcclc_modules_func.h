@@ -29,17 +29,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_main.h"
 #include "yatlcclc_clock.h"
 #include "yatlcclc_fc_func.h"
+#include "yatlcclc_os_func.h"
 
-void Module_init(MODULE * module, char * code, short phases_count, ...);
+void Module_init(MODULE * module, short index, char * code, short phases_count, ...);
 void ModuleMill_init(MODULEMILL * modulemill, MODULE modules[], short modules_count, short waiting_module);
+void Modules_update_primary(MODULEMILL * modulemill, MODULE modules[], short modules_count);
+void Modules_update_alternative(MODULEMILL * modulemill, MODULE modules[], short modules_count, PHASE phases[], short phases_count);
 void Modules_move_the_mill(MODULEMILL * modulemill, MODULE modules[], short modules_count, PHASE phases[], short phases_count);
+void Modules_set_alternative_space_default(PHASE phases[], short phases_count, short space);
 
 struct MODULE_STRUCT
 {
 	/* State */
 	short Hold;
 	short AllRealised;
-	short Number;
+	short Index;
 	short ModuleStart;
 	short IsActive;
 

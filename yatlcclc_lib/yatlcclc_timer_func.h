@@ -39,11 +39,12 @@ struct TIMER_STRUCT
 	char * Code;
 	
 	/* Timer state (read only) */
-	short Maximum; /* Timer max value */
-	short Current; /* Timer current value */
-	char Active;   /* Timer is active/inactive */
-	char Started;  /* Timer has started */
-	char Ended;    /* Timer has ended after reaching maximum */
+	short Maximum;   /* Timer max value */
+	short Current;   /* Timer current value */
+	short Remaining; /* Timer current value */
+	char Active;     /* Timer is active/inactive */
+	char Started;    /* Timer has started */
+	char Ended;      /* Timer has ended after reaching maximum */
 
 	/* Instructions */
 	char Start;    /* Set to TRUE to start the timer */

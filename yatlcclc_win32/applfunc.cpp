@@ -282,17 +282,17 @@ HRGN BitmapToRegion(HDC hdc, COLORREF cRef, int _x, int _y)
 void CreateAllResources(HBRUSH CGBrushes[])
 {
 
-	CGBrushes[SO_RED] = CreateSolidBrush(RGB(128, 0, 0));
-	CGBrushes[SO_GREEN] = CreateSolidBrush(RGB(0, 128, 0));
-	CGBrushes[SO_YELLOW] = CreateSolidBrush(RGB(255, 255, 0));
-	//CGBrushes[NEXTRED] = CreateSolidBrush(RGB(255, 0, 0));
-	//CGBrushes[PREGREEN] = CreateSolidBrush(RGB(0, 0, 255));
-	//CGBrushes[FIXEDGREEN] = CreateSolidBrush(RGB(0, 128, 0));
-	//CGBrushes[WAITGREEN] = CreateSolidBrush(RGB(0, 128, 128));
-	//CGBrushes[EXTENDGREEN] = CreateSolidBrush(RGB(0, 255, 0));
-	//CGBrushes[FREEEXGREEN] = CreateSolidBrush(RGB(255, 255, 255));
-	//CGBrushes[YELLOW] = CreateSolidBrush(RGB(255, 255, 0));
-	//CGBrushes[WAITRED] = CreateSolidBrush(RGB(128, 0, 0));
+	CGBrushes_out[SO_RED] = CreateSolidBrush(RGB(128, 0, 0));
+	CGBrushes_out[SO_GREEN] = CreateSolidBrush(RGB(0, 128, 0));
+	CGBrushes_out[SO_YELLOW] = CreateSolidBrush(RGB(255, 255, 0));
+	CGBrushes[NEXTRED] = CreateSolidBrush(RGB(255, 0, 0));
+	CGBrushes[PREGREEN] = CreateSolidBrush(RGB(0, 0, 255));
+	CGBrushes[FIXEDGREEN] = CreateSolidBrush(RGB(0, 128, 0));
+	CGBrushes[WAITGREEN] = CreateSolidBrush(RGB(0, 128, 128));
+	CGBrushes[EXTENDGREEN] = CreateSolidBrush(RGB(0, 255, 0));
+	CGBrushes[FREEEXGREEN] = CreateSolidBrush(RGB(255, 255, 255));
+	CGBrushes[YELLOW] = CreateSolidBrush(RGB(255, 255, 0));
+	CGBrushes[WAITRED] = CreateSolidBrush(RGB(128, 0, 0));
 }
 
 HWND CreateStatusBar(HWND hwndParent, int idStatus, HINSTANCE
@@ -394,7 +394,7 @@ HWND CreateCoolToolbar(HWND hWndParent, HINSTANCE hInst)
 		{ 0, IDM_TIME_REALTIME, TBSTATE_ENABLED, buttonStyles,{ 0 }, 0, NULL },
 		{ 1, IDM_TIME_LOWSPEED, TBSTATE_ENABLED, buttonStyles,{ 0 }, 0, NULL },
 		{ 2, IDM_TIME_MIDSPEED, TBSTATE_ENABLED, buttonStyles,{ 0 }, 0, NULL },
-		{ 3, IDM_TIME_HISPEED, TBSTATE_ENABLED, buttonStyles,{ 0 }, 0, NULL },
+		{ 3, IDM_TIME_HIGHSPEED, TBSTATE_ENABLED, buttonStyles,{ 0 }, 0, NULL },
 		{ 0, 0, TBSTATE_ENABLED, TBSTYLE_SEP, (BYTE)0, 0L, (DWORD_PTR)NULL },
 		{ 4, IDM_SIMULATION, TBSTATE_ENABLED, buttonStyles,{ 0 }, 0, NULL },
 

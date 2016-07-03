@@ -40,7 +40,8 @@ void Phases_timers_update(PHASE phases[], short phases_count, CLOCK * clock);
 void Phase_timers_update(PHASE * phase, CLOCK * clock);
 void Phases_requests(PHASE phases[], short phases_count);
 void Phases_extending(PHASE phases[], short phases_count);
-void Phases_state_update(PHASE phases[], short phases_count, short * cif_guswijz);
+void Phases_state_update_ML(PHASE phases[], short phases_count, short * cif_guswijz);
+void Phases_state_update_FIX(PHASE phases[], short phases_count, short * cif_guswijz);
 void Phases_state_out_update(PHASE phases[], short phases_count);
 void Phases_update_conflicts(PHASE phases[], short phases_count);
 
@@ -92,8 +93,10 @@ struct PHASE_STRUCT
 
 	/* Modules state */
 	short ML_Primary;
+	short ML_Primary_active;
 	short ML_Primary_done;
 	short ML_Alternative;
+	short ML_Alt_Space;
 
 	/* Settings */
 	SWITCH Fixed_request;
@@ -117,6 +120,8 @@ struct PHASE_STRUCT
 
 #define PR_REAL 0x0001
 #define PR_SKIP 0x0002
+
+#define AR_REAL_POSSIBLE 0x0001
 
 #define REQ_DET  0x0001
 #define REQ_FIX  0x0002

@@ -23,13 +23,27 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef YATLCCLC_CIF_H_INCLUDED
-#define YATLCCLC_CIF_H_INCLUDED
+#ifndef YATLCCLC_OSFUNC_H_INCLUDED
+#define YATLCCLC_OSFUNC_H_INCLUDED
 
 #include "yatlcclc_main.h"
-#include "yatlcclc_fc_func.h"
-#include "yatlcclc_os_func.h"
 
-void Set_GUS(PHASE phases[], short phases_count, OUTGOING_SIGNAL os[], short os_count);
+void Outgoing_signal_init(OUTGOING_SIGNAL * os, const char * code, short index);
+void Outgoing_signals_update_real(OUTGOING_SIGNAL os[], short os_count);
+static void Outgoing_signal_update_real(OUTGOING_SIGNAL * os);
+void Outgoing_signals_update_desired(OUTGOING_SIGNAL os[], short os_count);
+static void Outgoing_signal_update_desired(OUTGOING_SIGNAL * os);
+void Outgoing_signal_set_desired(OUTGOING_SIGNAL * os, short state_desired, short * cif_guswijz);
 
-#endif // YATLCCLC_CIF_H_INCLUDED
+struct OUTGOING_SIGNAL_STRUCT
+{
+	/* Outgoing signal state */
+	short State_desired;
+	short State_real;
+
+	/* Outgoing signal info */
+	char * Code;
+	short Index;
+};
+
+#endif /* YATLCCLC_OSFUNC_H_INCLUDED */

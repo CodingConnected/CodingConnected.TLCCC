@@ -25,7 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "yatlcclc_cif.h"
 
-void Set_GUS(PHASE phases[], short phases_count)
+void Set_GUS(PHASE phases[], short phases_count, OUTGOING_SIGNAL os[], short os_count)
 {
 	int i;
 	for (i = 0; i < phases_count; ++i)
@@ -43,4 +43,6 @@ void Set_GUS(PHASE phases[], short phases_count)
 			break;
 		}
 	}
+
+	Outgoing_signals_update_desired(os, os_count);
 }

@@ -37,6 +37,7 @@ DWORD WINAPI ApplProc(
 		
 		UpdateClock();
 		applicatieprogramma(0);
+		CIF_GUSWIJZ = FALSE;
 		switch (iSpeed)
 		{
 		case SPEED_RT:
@@ -293,6 +294,15 @@ void CreateAllResources(HBRUSH CGBrushes[])
 	CGBrushes[FREEEXGREEN] = CreateSolidBrush(RGB(255, 255, 255));
 	CGBrushes[YELLOW] = CreateSolidBrush(RGB(255, 255, 0));
 	CGBrushes[WAITRED] = CreateSolidBrush(RGB(128, 0, 0));
+
+	CGBrushes_alt[NEXTRED] = CreateSolidBrush(RGB(255, 128, 128));
+	CGBrushes_alt[PREGREEN] = CreateSolidBrush(RGB(128, 128, 255));
+	CGBrushes_alt[FIXEDGREEN] = CreateSolidBrush(RGB(128, 255, 128));
+	CGBrushes_alt[WAITGREEN] = CreateSolidBrush(RGB(128, 255, 255));
+	CGBrushes_alt[EXTENDGREEN] = CreateSolidBrush(RGB(128, 255, 128));
+	CGBrushes_alt[FREEEXGREEN] = CreateSolidBrush(RGB(255, 255, 255));
+	CGBrushes_alt[YELLOW] = CreateSolidBrush(RGB(255, 255, 128));
+	CGBrushes_alt[WAITRED] = CreateSolidBrush(RGB(128, 0, 0));
 }
 
 HWND CreateStatusBar(HWND hwndParent, int idStatus, HINSTANCE

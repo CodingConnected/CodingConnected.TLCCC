@@ -25,11 +25,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "tlc_sys.h"
 
-short X_is[DPMAX];
-short Y_is[DPMAX];
+short X_is[ISMAX];
+short Y_is[ISMAX];
 
-short X_us[FCMAX];
-short Y_us[FCMAX];
+short X_us[USMAX];
+short Y_us[USMAX];
 
 void DisplayParameters(void)
 {
@@ -47,6 +47,14 @@ void DisplayParameters(void)
 	X_us[fc34] = 196; Y_us[fc34] = 346;
 	X_us[fc28] = 190; Y_us[fc28] = 177;
 	X_us[fc38] = 190; Y_us[fc38] = 158;
+
+	X_us[ossegm1+FCMAX] = 22; Y_us[ossegm1+FCMAX] = 452;
+	X_us[ossegm2+FCMAX] = 10; Y_us[ossegm2+FCMAX] = 461;
+	X_us[ossegm3+FCMAX] = 31; Y_us[ossegm3+FCMAX] = 461;
+	X_us[ossegm4+FCMAX] = 22; Y_us[ossegm4+FCMAX] = 473;
+	X_us[ossegm5+FCMAX] = 10; Y_us[ossegm5+FCMAX] = 484;
+	X_us[ossegm6+FCMAX] = 31; Y_us[ossegm6+FCMAX] = 484;
+	X_us[ossegm7+FCMAX] = 22; Y_us[ossegm7+FCMAX] = 494;
 
 	X_is[d01_1] = 287; Y_is[d01_1] = 210;
 	X_is[d01_2] = 374; Y_is[d01_2] = 210;

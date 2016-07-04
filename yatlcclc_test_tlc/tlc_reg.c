@@ -38,6 +38,7 @@ CLOCK clock = { 0 };
 
 #ifdef YATLCCLC_WIN32
 	short Phases_internal_state[FCMAX];
+	short Phases_internal_state_alt[FCMAX];
 #endif
 
 /* Variables to exchange info externaly */
@@ -49,7 +50,7 @@ s_int16 applicatieprogramma(s_int16 state)
 	if (state == CIF_INIT)
 	{		
 		/* Initialize */
-		application_init(phases, detectors, CT_max, &modulemill, modules, &clock);
+		application_init(phases, detectors, outging_signals, CT_max, &modulemill, modules, &clock);
 	}
 	else
 	{
@@ -86,14 +87,13 @@ s_int16 applicatieprogramma(s_int16 state)
 		Modules_update_alternative(&modulemill, modules, MLMAX, phases, FCMAX);
 		Phases_state_update_ML(phases, FCMAX, &CIF_GUSWIJZ);
 		Modules_move_the_mill(&modulemill, modules, MLMAX, phases, FCMAX);
+
+		Modules_update_segment_display(&modulemill, outging_signals, ossegm1, &CIF_GUSWIJZ);
 		
 		if (CIF_GUSWIJZ)
 		{
-			// TODO: Change so it writes to USMAX also...
 			Phases_state_out_update(phases, FCMAX);
-
-			// TODO: change so it uses only USMAX...
-			Set_GUS(phases, FCMAX, o);
+			Set_GUS(phases, FCMAX, outging_signals, USMAX-FCMAX);
 		}
 
 #ifdef YATLCCLC_WIN32
@@ -102,6 +102,7 @@ s_int16 applicatieprogramma(s_int16 state)
 		for (i = 0; i < FCMAX; ++i)
 		{
 			Phases_internal_state[i] = phases[i].CycleState;
+			Phases_internal_state_alt[i] = phases[i].ML_Alternative;
 		}
 #endif
 		

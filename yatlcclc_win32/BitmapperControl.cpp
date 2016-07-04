@@ -48,7 +48,12 @@ static void BitmapperControlPaint(HWND hWnd, int fcmax, int dpmax)
 		if (bInternalState)
 		{
 			if (Phases_internal_state[i] < STATE_MAX)
-				SelectObject(memHdc, CGBrushes[Phases_internal_state[i]]);
+			{
+				if (Phases_internal_state_alt[i])
+					SelectObject(memHdc, CGBrushes_alt[Phases_internal_state[i]]);
+				else
+					SelectObject(memHdc, CGBrushes[Phases_internal_state[i]]);
+			}
 			ExtFloodFill(memHdc, X_us[i], Y_us[i], 0x000000, FLOODFILLBORDER);
 		}
 		else
@@ -57,6 +62,19 @@ static void BitmapperControlPaint(HWND hWnd, int fcmax, int dpmax)
 				SelectObject(memHdc, CGBrushes_out[CIF_GUS[i]]);
 			ExtFloodFill(memHdc, X_us[i], Y_us[i], 0x000000, FLOODFILLBORDER);
 		}
+	}
+
+	for (int i = 0; i < CIF_PB_AANT_US_OV; i++)
+	{
+		if (CIF_GUS[CIF_PB_AANT_US_FC + i] < STATE_MAX)
+		{
+			if(CIF_GUS[CIF_PB_AANT_US_FC + i])
+				SelectObject(memHdc, CGBrushes[EXTENDGREEN]);
+			else
+				SelectObject(memHdc, CGBrushes[WAITRED]);
+
+		}
+		ExtFloodFill(memHdc, X_us[CIF_PB_AANT_US_FC + i], Y_us[CIF_PB_AANT_US_FC + i], 0x000000, FLOODFILLBORDER);
 	}
 
 	for (int i = 0; i < CIF_PB_AANT_IS_D; i++)

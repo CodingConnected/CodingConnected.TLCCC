@@ -25,7 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "tlc_sys.h"
 
-void application_init(PHASE phases[], DETECTOR detectors[], short CT_max[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock)
+void application_init(PHASE phases[], DETECTOR detectors[], OUTGOING_SIGNAL os[], short CT_max[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock)
 {
 	int i;
 
@@ -210,6 +210,15 @@ void application_init(PHASE phases[], DETECTOR detectors[], short CT_max[], MODU
 	Phase_add_detectors(&phases[fc28], 2, &detectors[d28_1], &detectors[dk28]);
 	Phase_add_detectors(&phases[fc34], 2, &detectors[dk34a], &detectors[dk34b]);
 	Phase_add_detectors(&phases[fc38], 2, &detectors[dk38a], &detectors[dk38b]);
+
+	/* Initiate outgoing signals */
+	Outgoing_signal_init(&os[ossegm1], "segm1", ossegm1+FCMAX);
+	Outgoing_signal_init(&os[ossegm2], "segm2", ossegm2+FCMAX);
+	Outgoing_signal_init(&os[ossegm3], "segm3", ossegm3+FCMAX);
+	Outgoing_signal_init(&os[ossegm4], "segm4", ossegm4+FCMAX);
+	Outgoing_signal_init(&os[ossegm5], "segm5", ossegm5+FCMAX);
+	Outgoing_signal_init(&os[ossegm6], "segm6", ossegm6+FCMAX);
+	Outgoing_signal_init(&os[ossegm7], "segm7", ossegm7+FCMAX);
 
 	/* Initiate clock structure */
 	Clock_CIF_init(clock);

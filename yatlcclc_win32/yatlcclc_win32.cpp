@@ -63,6 +63,7 @@ HANDLE applThread = NULL;
 struct IS_STRUCT * inputs;
 
 HBRUSH CGBrushes[STATE_MAX];
+HBRUSH CGBrushes_alt[STATE_MAX];
 HBRUSH CGBrushes_out[STATE_OUT_MAX];
 
 HWND hWndBitmapper;

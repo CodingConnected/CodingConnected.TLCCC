@@ -37,6 +37,7 @@ void Modules_update_primary(MODULEMILL * modulemill, MODULE modules[], short mod
 void Modules_update_alternative(MODULEMILL * modulemill, MODULE modules[], short modules_count, PHASE phases[], short phases_count);
 void Modules_move_the_mill(MODULEMILL * modulemill, MODULE modules[], short modules_count, PHASE phases[], short phases_count);
 void Modules_set_alternative_space_default(PHASE phases[], short phases_count, short space);
+void Modules_update_segment_display(MODULEMILL * modulemill, OUTGOING_SIGNAL os[], short index, short * cif_guswijz);
 
 struct MODULE_STRUCT
 {

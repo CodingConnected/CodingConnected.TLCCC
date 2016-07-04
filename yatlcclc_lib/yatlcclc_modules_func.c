@@ -253,7 +253,7 @@ void Modules_update_segment_display(MODULEMILL * modulemill, OUTGOING_SIGNAL os[
 {
 	switch (modulemill->ActiveModule_index)
 	{
-	case 1:
+	case 0:
 		Outgoing_signal_set_desired(&os[index + 0], 0, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 1], 0, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 2], 1, cif_guswijz);
@@ -262,7 +262,7 @@ void Modules_update_segment_display(MODULEMILL * modulemill, OUTGOING_SIGNAL os[
 		Outgoing_signal_set_desired(&os[index + 5], 1, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 6], 0, cif_guswijz);
 		break;
-	case 2:
+	case 1:
 		Outgoing_signal_set_desired(&os[index + 0], 1, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 1], 0, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 2], 1, cif_guswijz);
@@ -271,7 +271,7 @@ void Modules_update_segment_display(MODULEMILL * modulemill, OUTGOING_SIGNAL os[
 		Outgoing_signal_set_desired(&os[index + 5], 0, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 6], 1, cif_guswijz);
 		break;
-	case 3:
+	case 2:
 		Outgoing_signal_set_desired(&os[index + 0], 1, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 1], 0, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 2], 1, cif_guswijz);
@@ -280,7 +280,7 @@ void Modules_update_segment_display(MODULEMILL * modulemill, OUTGOING_SIGNAL os[
 		Outgoing_signal_set_desired(&os[index + 5], 1, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 6], 1, cif_guswijz);
 		break;
-	case 4:
+	case 3:
 		Outgoing_signal_set_desired(&os[index + 0], 0, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 1], 1, cif_guswijz);
 		Outgoing_signal_set_desired(&os[index + 2], 1, cif_guswijz);

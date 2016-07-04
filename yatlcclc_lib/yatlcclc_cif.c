@@ -43,6 +43,8 @@ void Set_GUS(PHASE phases[], short phases_count, OUTGOING_SIGNAL os[], short os_
 			break;
 		}
 	}
-
-	Outgoing_signals_update_desired(os, os_count);
+	for (i = 0; i < os_count; ++i)
+	{
+		CIF_GUS[os[i].Index] = os[i].State_desired;
+	}
 }

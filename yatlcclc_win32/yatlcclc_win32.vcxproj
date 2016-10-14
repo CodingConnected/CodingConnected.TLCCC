@@ -155,8 +155,8 @@
     <ResourceCompile Include="yatlcclc.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bitmap1.bmp" />
     <Image Include="icon.ico" />
-    <Image Include="icon1.ico" />
     <Image Include="icon_small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

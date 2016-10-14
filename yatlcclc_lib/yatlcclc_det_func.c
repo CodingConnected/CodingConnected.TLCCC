@@ -48,6 +48,21 @@ void Detector_init(DETECTOR * detector, const char * code, short * cif_is_val, s
 	Timer_init(&detector->Timer_ErrorLo, temp, togmax, TE_type);
 }
 
+void Detector_free(DETECTOR * detector)
+{
+	if (detector->Code != NULL)
+		free(detector->Code);
+}
+
+void Detectors_free(DETECTOR detectors[], short detector_count)
+{
+	int i;
+	for (i = 0; i < detector_count; ++i)
+	{
+		Detector_free(&detectors[i]);
+	}
+}
+
 void Detectors_update(DETECTOR detectors[], short detector_count)
 {
 	int i;

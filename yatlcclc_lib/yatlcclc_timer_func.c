@@ -35,6 +35,21 @@ void Timer_init(TIMER * timer, char * code, short maximum, short t_type)
 	timer->TimeType = t_type;
 }
 
+void Timer_free(TIMER * timer)
+{
+	if (timer->Code != NULL)
+		free(timer->Code);
+}
+
+void Timers_free(TIMER timers[], short timers_count)
+{
+	int i;
+	for (i = 0; i < timers_count; ++i)
+	{
+		Outgoing_signal_free(&timers[i]);
+	}
+}
+
 void Timers_update(TIMER timers[], int timers_count, CLOCK * clock)
 {
 	int i;

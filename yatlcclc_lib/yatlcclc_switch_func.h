@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_main.h"
 
 void Switch_init(SWITCH * _switch, const char * code, short setting);
+void Switch_free(SWITCH * _switch);
+void Switches_free(SWITCH switches[], short switches_count);
 
 struct SWITCH_STRUCT
 {

@@ -87,6 +87,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #define TMMAX 1
 
+#define SCHMAX 1
+
 #define PARM1MAX 1
 
 #define ML1 0
@@ -102,9 +104,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_det_func.h"
 #include "yatlcclc_timer_func.h"
 #include "yatlcclc_modules_func.h"
+#include "yatlcclc_prm_func.h"
+#include "yatlcclc_switch_func.h"
 #include "yatlcclc_cif.h"
 
 /* Function declarations */
-void application_init(PHASE phases[], DETECTOR detectors[], OUTGOING_SIGNAL os[], short CT_max[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock);
+void application_init(PHASE phases[], DETECTOR detectors[], OUTGOING_SIGNAL os[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock);
+void application_exit();
 
 #endif // TLC_H_INCLUDED

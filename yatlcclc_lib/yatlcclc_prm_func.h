@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_main.h"
 
 void Parameter_init(PARAMETER * parameter, const char * code, short type, short setting);
+void Parameter_free(PARAMETER * parameter);
+void Parameters_free(PARAMETER prms[], short prm_count);
 
 struct PARAMETER_STRUCT
 {

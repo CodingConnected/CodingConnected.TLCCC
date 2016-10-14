@@ -54,10 +54,10 @@
     <Image Include="icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="icon1.ico">
+    <Image Include="icon_small.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="icon_small.ico">
+    <Image Include="bitmap1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -27,12 +27,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define NO_CIF_MON
 #include "tlc_sys.h"
 
+static char running = TRUE;
+
 /* YATLCCLC variables */
 PHASE phases[FCMAX] = { 0 };
 OUTGOING_SIGNAL outging_signals[USMAX] = { 0 };
 DETECTOR detectors[DPMAX] = { 0 };
 TIMER timers[TMMAX] = { 0 };
 MODULE modules[MLMAX] = { 0 };
+SWITCH switches[SCHMAX] = { 0 };
+PARAMETER parameters[PARM1MAX] = { 0 };
 MODULEMILL modulemill = { 0 };
 CLOCK clock = { 0 };
 
@@ -41,18 +45,15 @@ CLOCK clock = { 0 };
 	short Phases_internal_state_alt[FCMAX];
 #endif
 
-/* Variables to exchange info externaly */
-short CT_max[FCMAX * FCMAX];
-
 s_int16 applicatieprogramma(s_int16 state)
 {
 	
 	if (state == CIF_INIT)
 	{		
 		/* Initialize */
-		application_init(phases, detectors, outging_signals, CT_max, &modulemill, modules, &clock);
+		application_init(phases, detectors, outging_signals, &modulemill, modules, &clock);
 	}
-	else
+	else if(running == TRUE)
 	{
 		/* Read data from interface */
 		if (CIF_ISWIJZ)
@@ -84,7 +85,7 @@ s_int16 applicatieprogramma(s_int16 state)
 		Phases_update_conflicts(phases, FCMAX);
 		
 		Modules_update_primary(&modulemill, modules, MLMAX);
-		Modules_update_alternative(&modulemill, modules, MLMAX, phases, FCMAX);
+		//Modules_update_alternative(&modulemill, modules, MLMAX, phases, FCMAX);
 		Phases_state_update_ML(phases, FCMAX, &CIF_GUSWIJZ);
 		Modules_move_the_mill(&modulemill, modules, MLMAX, phases, FCMAX);
 
@@ -110,4 +111,19 @@ s_int16 applicatieprogramma(s_int16 state)
 	}
 
 	return 0;
+}
+
+void application_exit()
+{
+	// Set running state to false, cause otherwise the application
+	// will try to access freed memory if running at high speeds
+	running = FALSE;
+
+	// Free all allocated memory; good programming practice!
+	Phases_free(phases, FCMAX);
+	Detectors_free(detectors, DPMAX);
+	ModuleMill_free(&modulemill, MLMAX);
+	Parameters_free(parameters, PARM1MAX);
+	Timers_free(&timers, TMMAX);
+	Switches_free(&switches, SCHMAX);
 }

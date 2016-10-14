@@ -29,6 +29,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_main.h"
 
 void Timer_init(TIMER * timer, char * code, short maximum, short t_type);
+void Timer_free(TIMER * timer);
+void Timers_free(TIMER timers[], short timers_count);
 void Timers_update(TIMER timers[], int timers_count, CLOCK * klok);
 void Timer_update(TIMER * timer, CLOCK * klok);
 

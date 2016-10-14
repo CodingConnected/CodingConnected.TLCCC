@@ -33,6 +33,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_clock.h"
 
 void Phase_init(PHASE * phase, const char * code, short index, short tggmax, short tgfmax, short tgemax, short tyemax, short trgmax, short headmax);
+void Phase_free(PHASE * phase, short phases_count);
+void Phases_free(PHASE phases[], short phases_count);
 void Phase_add_detectors(PHASE * phase, short detectors_count, ...);
 void Phase_conflict_init(short phc1, short phc2, short conflictstable[], short phases_count, short clearingtime);
 void Phases_set_conflict_pointers(PHASE phases[], short phases_count, short conflictstable[]);

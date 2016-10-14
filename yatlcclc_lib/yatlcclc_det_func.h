@@ -31,6 +31,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "yatlcclc_timer_func.h"
 
 void Detector_init(DETECTOR * detector, const char * code, short * cif_is_val, short type, short request, short extend, short tdbmax, short tdhmax, short togmax, short tbgmax);
+void Detector_free(DETECTOR * detector);
+void Detectors_free(DETECTOR detectors[]);
 void Detectors_update(DETECTOR detectors[], short detector_count);
 void Detector_update(DETECTOR * detector);
 void Detectors_timers_update(DETECTOR detectors[], short detector_count, CLOCK * klok);

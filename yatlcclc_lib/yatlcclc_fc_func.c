@@ -55,6 +55,47 @@ void Phase_init(PHASE * phase, const char * code, short index, short tggmax, sho
 	phase->State_out = SO_RED;
 }
 
+void Phase_free(PHASE * phase, short phases_count)
+{
+	int j = 0;
+
+	if (phase->Code != NULL)
+		free(phase->Code);
+
+	Timer_free(&phase->Timer_GG);
+	Timer_free(&phase->Timer_GF);
+	Timer_free(&phase->Timer_GE);
+	Timer_free(&phase->Timer_YE);
+	Timer_free(&phase->Timer_RG);
+	
+	if (phase->Detectors != NULL)
+		free(phase->Detectors);
+
+	if (phase->Conflicts != NULL)
+	{
+		for (j = 0; j < phase->Conflict_count; ++j)
+		{
+			if (phase->Conflicts[j] != NULL)
+			{
+				TIMER t = (phase->Conflicts[j]->Timer_clearing);
+				Timer_free(&(phase->Conflicts[j]->Timer_clearing));
+				free(phase->Conflicts[j]);
+			}
+		}
+		free(phase->Conflicts);
+	}
+}
+
+void Phases_free(PHASE phases[], short phases_count)
+{
+	int j = 0;
+
+	for (j = 0; j < phases_count; ++j)
+	{
+		Phase_free(&phases[j], phases_count);
+	}
+}
+
 void Phase_add_detectors(PHASE * phase, short detectors_count, ...)
 {
 	if (detectors_count > 0)
@@ -77,7 +118,7 @@ void Phase_add_detectors(PHASE * phase, short detectors_count, ...)
 
 void Phase_conflict_init(short phc1, short phc2, short conflictstable[], short phases_count, short clearingtime)
 {
-	conflictstable[phc1 * phases_count + phc2] = clearingtime;
+	conflictstable[phc1 + phc2 * phases_count] = clearingtime;
 }
 
 void Phases_set_conflict_pointers(PHASE phases[], short phases_count, short conflictstable[])
@@ -88,7 +129,7 @@ void Phases_set_conflict_pointers(PHASE phases[], short phases_count, short conf
 	{
 		for (j = 0; j < phases_count; ++j)
 		{
-			if (conflictstable[i * phases_count + j] != -1)
+			if (conflictstable[i + j * phases_count] != -1)
 			{
 				phases[i].Conflict_count++;
 			}
@@ -97,12 +138,12 @@ void Phases_set_conflict_pointers(PHASE phases[], short phases_count, short conf
 		k = 0;
 		for (j = 0; j < phases_count; ++j)
 		{
-			if (conflictstable[i * phases_count + j] != -1)
+			if (conflictstable[i + j * phases_count] != -1)
 			{
 				phases[i].Conflicts[k] = (CONFLICT *)malloc(sizeof(CONFLICT));
 				phases[i].Conflicts[k]->ConflictPhase = &phases[j];
 				snprintf(temp, 128, "TO%s%s", phases[i].Code, phases[j].Code);
-				Timer_init(&phases[i].Conflicts[k]->Timer_clearing, temp, conflictstable[i * phases_count + j], TE_type);
+				Timer_init(&phases[i].Conflicts[k]->Timer_clearing, temp, conflictstable[i + j * phases_count], TE_type);
 				k++;
 			}
 		}

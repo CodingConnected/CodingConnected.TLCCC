@@ -25,9 +25,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "tlc_sys.h"
 
-void application_init(PHASE phases[], DETECTOR detectors[], OUTGOING_SIGNAL os[], short CT_max[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock)
+void application_init(PHASE phases[], DETECTOR detectors[], OUTGOING_SIGNAL os[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock)
 {
 	int i;
+
+	short CT_max[FCMAX * FCMAX] = { 0 };
 
 	/* Specify phases
 	           PHASE-pointer  code    index tgg  tgf  tge  tye  trg  thm */
@@ -222,4 +224,6 @@ void application_init(PHASE phases[], DETECTOR detectors[], OUTGOING_SIGNAL os[]
 
 	/* Initiate clock structure */
 	Clock_CIF_init(clock);
+
+	atexit(application_exit);
 }

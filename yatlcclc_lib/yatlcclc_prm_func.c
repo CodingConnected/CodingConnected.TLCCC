@@ -33,3 +33,18 @@ void Parameter_init(PARAMETER * parameter, const char * code, short type, short 
 	parameter->TimeType = type;
 	parameter->Setting = setting;
 }
+
+void Parameter_free(PARAMETER * parameter)
+{
+	if (parameter->Code != NULL)
+		free(parameter->Code);
+}
+
+void Parameters_free(PARAMETER prms[], short prm_count)
+{
+	int i;
+	for (i = 0; i < prm_count; ++i)
+	{
+		Outgoing_signal_free(&prms[i]);
+	}
+}

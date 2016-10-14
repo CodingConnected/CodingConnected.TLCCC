@@ -54,10 +54,44 @@ void Module_init(MODULE * module, short index, char * code, short phases_count, 
 	}
 }
 
+void ModuleMill_free(MODULEMILL * modulemill, short modules_count)
+{
+	int ml;
+
+	if (modulemill == NULL)
+		return;
+
+	for (ml = 0; ml < modules_count; ++ml)
+	{
+		if (modulemill->Modules[ml] != NULL)
+		{
+			Module_free(modulemill->Modules[ml]);
+		}
+	}
+}
+
+void Module_free(MODULE * module)
+{
+	if (module->Code != NULL)
+		free(module->Code);
+
+	if (module->Phases != NULL)
+		free(module->Phases);
+}
+
 void ModuleMill_init(MODULEMILL * modulemill, MODULE modules[], short modules_count, short waiting_module)
 {
+	int i;
+
 	if (modules_count <= 0 || waiting_module >= modules_count)
 		return;
+
+	modulemill->Modules = (MODULE **)malloc(modules_count * sizeof(MODULE *));
+	
+	for (i = 0; i < modules_count; ++i)
+	{
+		modulemill->Modules[i] = &modules[i];
+	}
 
 	modules[0].IsActive = TRUE;
 	modulemill->ActiveModule = &modules[0];
@@ -79,16 +113,16 @@ void Modules_set_alternative_space_default(PHASE phases[], short phases_count, s
 	}
 }
 
-void Modules_update_primary(MODULEMILL * modulemill, MODULE modules[], short modules_count)
+void Modules_update_primary(MODULEMILL * modulemill, short modules_count)
 {
 	int i = modulemill->ActiveModule_index;
 	int k;
 	char ModGreenStarted = FALSE;
 	
 	/* Determine if the module has really begun: one or more phases green */
-	for (k = 0; k < modules[i].Phases_count; ++k)
+	for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
 	{
-		if (modules[i].Phases[k]->State_out != SO_RED)
+		if (modulemill->Modules[i]->Phases[k]->State_out != SO_RED)
 		{
 			ModGreenStarted = TRUE;
 			break;
@@ -96,34 +130,34 @@ void Modules_update_primary(MODULEMILL * modulemill, MODULE modules[], short mod
 	}
 
 	/* Set phases ML primary realisation state */
-	for (k = 0; k < modules[i].Phases_count; ++k)
+	for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
 	{
 		/* Set primary realisation: phase may realize */
-		if ((modules[i].Phases[k]->Request) &&
-			!(modules[i].Phases[k]->ML_Primary_done))
+		if ((modulemill->Modules[i]->Phases[k]->Request) &&
+			!(modulemill->Modules[i]->Phases[k]->ML_Primary_done))
 		{
-			modules[i].Phases[k]->ML_Primary = TRUE;
+			modulemill->Modules[i]->Phases[k]->ML_Primary = TRUE;
 		}
 		/* Set primary realisation done if phase is in primary green */
-		if ((modules[i].Phases[k]->State_out == SO_GREEN) &&
-			(modules[i].Phases[k]->ML_Primary) &&
-			!(modules[i].Phases[k]->ML_Primary_done))
+		if ((modulemill->Modules[i]->Phases[k]->State_out == SO_GREEN) &&
+			(modulemill->Modules[i]->Phases[k]->ML_Primary) &&
+			!(modulemill->Modules[i]->Phases[k]->ML_Primary_done))
 		{
-			modules[i].Phases[k]->ML_Primary_done |= PR_REAL;
+			modulemill->Modules[i]->Phases[k]->ML_Primary_done |= PR_REAL;
 		}
 	}
 
 	/* Set phases ML skipped primary realisation */
 	if (ModGreenStarted)
 	{
-		for (k = 0; k < modules[i].Phases_count; ++k)
+		for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
 		{
-			if (!modules[i].Phases[k]->ML_Primary_done && !modules[i].Phases[k]->Request)
+			if (!modulemill->Modules[i]->Phases[k]->ML_Primary_done && !modulemill->Modules[i]->Phases[k]->Request)
 			{
 				int l, m = TRUE;
-				for (l = 0; l < modules[i].Phases_count; ++l)
+				for (l = 0; l < modulemill->Modules[i]->Phases_count; ++l)
 				{
-					if (!modules[i].Phases[k]->ML_Primary_done && modules[i].Phases[k]->Request)
+					if (!modulemill->Modules[i]->Phases[k]->ML_Primary_done && modulemill->Modules[i]->Phases[k]->Request)
 					{
 						m = FALSE;
 						break;
@@ -131,7 +165,7 @@ void Modules_update_primary(MODULEMILL * modulemill, MODULE modules[], short mod
 				}
 				if (m)
 				{
-					modules[i].Phases[k]->ML_Primary_done |= PR_SKIP;
+					modulemill->Modules[i]->Phases[k]->ML_Primary_done |= PR_SKIP;
 				}
 			}
 		}
@@ -202,7 +236,11 @@ void Modules_move_the_mill(MODULEMILL * modulemill, MODULE modules[], short modu
 	modules[i].AllRealised = TRUE;
 	for (k = 0; k < modules[i].Phases_count; ++k)
 	{
-		if (modules[i].Phases[k]->Request && !modules[i].Phases[k]->ML_Primary_done)
+		if (modules[i].Phases[k]->Request && !modules[i].Phases[k]->ML_Primary_done 
+			/* || (modules[i].Phases[k]->CycleState == PREGREEN ||
+			 modules[i].Phases[k]->CycleState == FIXEDGREEN ||
+			 modules[i].Phases[k]->CycleState == WAITGREEN ||
+			 modules[i].Phases[k]->CycleState == EXTENDGREEN)*/)
 		{
 			modules[i].AllRealised = FALSE;
 			break;

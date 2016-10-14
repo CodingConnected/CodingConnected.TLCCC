@@ -146,6 +146,7 @@
     <ClInclude Include="yatlcclc_det_func.h" />
     <ClInclude Include="yatlcclc_fc_func.h" />
     <ClInclude Include="yatlcclc_clock.h" />
+    <ClInclude Include="yatlcclc_generic.h" />
     <ClInclude Include="yatlcclc_main.h" />
     <ClInclude Include="yatlcclc_modules_func.h" />
     <ClInclude Include="yatlcclc_os_func.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="yatlcclc_det_func.c" />
     <ClCompile Include="yatlcclc_fc_func.c" />
     <ClCompile Include="yatlcclc_clock.c" />
+    <ClCompile Include="yatlcclc_generic.c" />
     <ClCompile Include="yatlcclc_modules_func.c" />
     <ClCompile Include="yatlcclc_os_func.c" />
     <ClCompile Include="yatlcclc_prm_func.c" />

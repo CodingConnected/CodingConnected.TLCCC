@@ -32,3 +32,19 @@ void Switch_init(SWITCH * _switch, const char * code, short setting)
 
 	_switch->Setting = setting;
 }
+
+
+void Switch_free(SWITCH * _switch)
+{
+	if (_switch->Code != NULL)
+		free(_switch->Code);
+}
+
+void Switches_free(SWITCH switches[], short switches_count)
+{
+	int i;
+	for (i = 0; i < switches_count; ++i)
+	{
+		Outgoing_signal_free(&switches[i]);
+	}
+}

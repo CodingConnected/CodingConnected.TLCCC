@@ -23,46 +23,19 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifndef YATLCCLC_GENERIC_H_INCLUDED
+#define YATLCCLC_GENERIC_H_INCLUDED
+
+#include "yatlcclc_main.h"
+#include "yatlcclc_fc_func.h"
+#include "yatlcclc_det_func.h"
+#include "yatlcclc_timer_func.h"
+#include "yatlcclc_modules_func.h"
 #include "yatlcclc_os_func.h"
+#include "yatlcclc_prm_func.h"
+#include "yatlcclc_switch_func.h"
+#include "yatlcclc_timer_func.h"
 
-void Outgoing_signal_init(OUTGOING_SIGNAL * os, const char * code, short index)
-{
-	os->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
-	snprintf(os->Code, strlen(code) + 1, "%s", code);
+void YATLCCLC_free_all(short phases_count);
 
-	os->Index = index;
-}
-
-void Outgoing_signal_free(OUTGOING_SIGNAL * os)
-{
-	if (os->Code != NULL)
-		free(os->Code);
-}
-
-void Outgoing_signals_free(OUTGOING_SIGNAL os[], short os_count)
-{
-	int i;
-	for (i = 0; i < os_count; ++i)
-	{
-		Outgoing_signal_free(&os[i]);
-	}
-}
-
-void Outgoing_signals_update_real(OUTGOING_SIGNAL os[], short os_count)
-{
-	int i;
-	for (i = 0; i < os_count; i++)
-	{
-		Outgoing_signal_update_real(&os[i]);
-	}
-}
-static void Outgoing_signal_update_real(OUTGOING_SIGNAL * os)
-{
-	os->State_real = CIF_WUS[os->Index];
-}
-
-void Outgoing_signal_set_desired(OUTGOING_SIGNAL * os, short state_desired, short * cif_guswijz)
-{
-	os->State_desired = state_desired;
-	*cif_guswijz = TRUE;
-}
+#endif // YATLCCLC_GENERIC_H_INCLUDED

@@ -384,7 +384,7 @@ HWND CreateCoolToolbar(HWND hWndParent, HINSTANCE hInst)
 	// create and add imagelist
 
 
-	HIMAGELIST hImgList = ImageList_LoadImage(hInst, MAKEINTRESOURCE(ID_TOOLBAR), 16, 16, CLR_DEFAULT, IMAGE_BITMAP, LR_LOADTRANSPARENT);
+	HIMAGELIST hImgList = ImageList_LoadImage(hInst, MAKEINTRESOURCE(IDB_BITMAP1), 16, 16, CLR_DEFAULT, IMAGE_BITMAP, LR_LOADTRANSPARENT);
 	SendMessage(hWndToolbar, TB_SETIMAGELIST, 0, (LPARAM)hImgList);
 
 

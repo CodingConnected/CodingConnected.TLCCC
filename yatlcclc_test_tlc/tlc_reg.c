@@ -84,10 +84,10 @@ s_int16 applicatieprogramma(s_int16 state)
 		// TODO: update free extending
 		Phases_update_conflicts(phases, FCMAX);
 		
-		Modules_update_primary(&modulemill, modules, MLMAX);
-		//Modules_update_alternative(&modulemill, modules, MLMAX, phases, FCMAX);
+		Modules_update_primary(&modulemill);
+		//Modules_update_alternative(&modulemill, phases, FCMAX);
 		Phases_state_update_ML(phases, FCMAX, &CIF_GUSWIJZ);
-		Modules_move_the_mill(&modulemill, modules, MLMAX, phases, FCMAX);
+		Modules_move_the_mill(&modulemill, phases, FCMAX);
 
 		Modules_update_segment_display(&modulemill, outging_signals, ossegm1, &CIF_GUSWIJZ);
 		

@@ -113,7 +113,7 @@ void Modules_set_alternative_space_default(PHASE phases[], short phases_count, s
 	}
 }
 
-void Modules_update_primary(MODULEMILL * modulemill, short modules_count)
+void Modules_update_primary(MODULEMILL * modulemill)
 {
 	int i = modulemill->ActiveModule_index;
 	int k;
@@ -172,7 +172,7 @@ void Modules_update_primary(MODULEMILL * modulemill, short modules_count)
 	}
 }
 
-void Modules_update_alternative(MODULEMILL * modulemill, MODULE modules[], short modules_count, PHASE phases[], short phases_count)
+void Modules_update_alternative(MODULEMILL * modulemill, PHASE phases[], short phases_count)
 {
 	int i, k, l;
 	for (k = 0; k < phases_count; ++k)
@@ -226,37 +226,37 @@ void Modules_update_alternative(MODULEMILL * modulemill, MODULE modules[], short
 	}
 }
 
-void Modules_move_the_mill(MODULEMILL * modulemill, MODULE modules[], short modules_count, PHASE phases[], short phases_count)
+void Modules_move_the_mill(MODULEMILL * modulemill, PHASE phases[], short phases_count)
 {
 	int i = modulemill->ActiveModule_index;
 	int k;
 	modulemill->ModuleStart = FALSE;
 
 	/* Set current module state */
-	modules[i].AllRealised = TRUE;
-	for (k = 0; k < modules[i].Phases_count; ++k)
+	modulemill->Modules[i]->AllRealised = TRUE;
+	for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
 	{
-		if (modules[i].Phases[k]->Request && !modules[i].Phases[k]->ML_Primary_done 
-			/* || (modules[i].Phases[k]->CycleState == PREGREEN ||
-			 modules[i].Phases[k]->CycleState == FIXEDGREEN ||
-			 modules[i].Phases[k]->CycleState == WAITGREEN ||
-			 modules[i].Phases[k]->CycleState == EXTENDGREEN)*/)
+		if (modulemill->Modules[i]->Phases[k]->Request && !modulemill->Modules[i]->Phases[k]->ML_Primary_done 
+			/* || (modulemill->Modules[i]->Phases[k]->CycleState == PREGREEN ||
+			 modulemill->Modules[i]->Phases[k]->CycleState == FIXEDGREEN ||
+			 modulemill->Modules[i]->Phases[k]->CycleState == WAITGREEN ||
+			 modulemill->Modules[i]->Phases[k]->CycleState == EXTENDGREEN)*/)
 		{
-			modules[i].AllRealised = FALSE;
+			modulemill->Modules[i]->AllRealised = FALSE;
 			break;
 		}
 	}
 
 	/* Move the mill */
-	if (modules[i].AllRealised)
+	if (modulemill->Modules[i]->AllRealised)
 	{
 		int wait = TRUE;
 
 		/* Reset flags for the current module */
-		for (k = 0; k < modules[i].Phases_count; ++k)
+		for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
 		{
-			modules[i].Phases[k]->ML_Primary = FALSE;
-			modules[i].Phases[k]->ML_Primary_done = FALSE;
+			modulemill->Modules[i]->Phases[k]->ML_Primary = FALSE;
+			modulemill->Modules[i]->Phases[k]->ML_Primary_done = FALSE;
 		}
 
 		/* Check if we wait in the waiting module */
@@ -281,7 +281,7 @@ void Modules_move_the_mill(MODULEMILL * modulemill, MODULE modules[], short modu
 			modulemill->ActiveModule_index++;
 			if (modulemill->ActiveModule_index >= modulemill->Modules_count)
 				modulemill->ActiveModule_index = 0;
-			modulemill->ActiveModule = &modules[modulemill->ActiveModule_index];
+			modulemill->ActiveModule = &modulemill->Modules[modulemill->ActiveModule_index];
 			modulemill->ModuleStart = TRUE;
 		}
 	}

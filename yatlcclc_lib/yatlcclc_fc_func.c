@@ -217,9 +217,9 @@ void Phases_state_update_ML(PHASE phases[], short phases_count, short * cif_gusw
 			// placeholder: move to next 
 			phases[i].CycleState = FIXEDGREEN;
 			phases[i].StartGreen = TRUE;
-			*cif_guswijz = TRUE;
 			phases[i].Timer_GF.Restart = TRUE;
 			phases[i].Timer_HeadMax.Restart = TRUE;
+			*cif_guswijz = TRUE;
 			break;
 		case FIXEDGREEN:
 			if (phases[i].Timer_GF.Ended)

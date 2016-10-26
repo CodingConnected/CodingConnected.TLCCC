@@ -146,7 +146,7 @@ void Modules_update_primary(MODULEMILL * modulemill)
 			modulemill->Modules[i]->Phases[k]->ML_Primary_done |= PR_REAL;
 		}
 	}
-
+	
 	/* Set phases ML skipped primary realisation */
 	if (ModGreenStarted)
 	{
@@ -236,11 +236,17 @@ void Modules_move_the_mill(MODULEMILL * modulemill, PHASE phases[], short phases
 	modulemill->Modules[i]->AllRealised = TRUE;
 	for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
 	{
-		if (modulemill->Modules[i]->Phases[k]->Request && !modulemill->Modules[i]->Phases[k]->ML_Primary_done 
-			/* || (modulemill->Modules[i]->Phases[k]->CycleState == PREGREEN ||
-			 modulemill->Modules[i]->Phases[k]->CycleState == FIXEDGREEN ||
-			 modulemill->Modules[i]->Phases[k]->CycleState == WAITGREEN ||
-			 modulemill->Modules[i]->Phases[k]->CycleState == EXTENDGREEN)*/)
+		/* Check if all phases with requests have realised */
+		if (modulemill->Modules[i]->Phases[k]->Request && !modulemill->Modules[i]->Phases[k]->ML_Primary_done)
+		{
+			modulemill->Modules[i]->AllRealised = FALSE;
+			break;
+		}
+		/* Check if all phases that are green are ready to move */
+		if (modulemill->Modules[i]->Phases[k]->ML_Primary_done && 
+			!(modulemill->Modules[i]->Phases[k]->State_out == SO_RED ||
+		      modulemill->Modules[i]->Phases[k]->CycleState == FREEEXGREEN || 
+			  modulemill->Modules[i]->Phases[k]->CycleState == YELLOW))
 		{
 			modulemill->Modules[i]->AllRealised = FALSE;
 			break;

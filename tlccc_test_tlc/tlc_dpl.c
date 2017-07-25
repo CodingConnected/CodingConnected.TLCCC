@@ -28,33 +28,33 @@ OTHER DEALINGS IN THE SOFTWARE.
 short X_is[ISMAX];
 short Y_is[ISMAX];
 
-short X_us[USMAX];
-short Y_us[USMAX];
+short X_us[OSMAX];
+short Y_us[OSMAX];
 
 void DisplayParameters(void)
 {
-	X_us[fc01] = 295; Y_us[fc01] = 212;
-	X_us[fc02] = 295; Y_us[fc02] = 232;
-	X_us[fc03] = 295; Y_us[fc03] = 253;
-	X_us[fc05] = 247; Y_us[fc05] = 370;
-	X_us[fc06] = 226; Y_us[fc06] = 370;
-	X_us[fc07] = 137; Y_us[fc07] = 295;
-	X_us[fc08] = 137; Y_us[fc08] = 274;
-	X_us[fc09] = 137; Y_us[fc09] = 254;
-	X_us[fc11] = 186; Y_us[fc11] = 116;
-	X_us[fc12] = 207; Y_us[fc12] = 116;
-	X_us[fc24] = 196; Y_us[fc24] = 330;
-	X_us[fc34] = 196; Y_us[fc34] = 346;
-	X_us[fc28] = 190; Y_us[fc28] = 177;
-	X_us[fc38] = 190; Y_us[fc38] = 158;
+	X_us[sg01] = 295; Y_us[sg01] = 212;
+	X_us[sg02] = 295; Y_us[sg02] = 232;
+	X_us[sg03] = 295; Y_us[sg03] = 253;
+	X_us[sg05] = 247; Y_us[sg05] = 370;
+	X_us[sg06] = 226; Y_us[sg06] = 370;
+	X_us[sg07] = 137; Y_us[sg07] = 295;
+	X_us[sg08] = 137; Y_us[sg08] = 274;
+	X_us[sg09] = 137; Y_us[sg09] = 254;
+	X_us[sg11] = 186; Y_us[sg11] = 116;
+	X_us[sg12] = 207; Y_us[sg12] = 116;
+	X_us[sg24] = 196; Y_us[sg24] = 330;
+	X_us[sg34] = 196; Y_us[sg34] = 346;
+	X_us[sg28] = 190; Y_us[sg28] = 177;
+	X_us[sg38] = 190; Y_us[sg38] = 158;
 
-	X_us[ossegm1+FCMAX] = 22; Y_us[ossegm1+FCMAX] = 452;
-	X_us[ossegm2+FCMAX] = 10; Y_us[ossegm2+FCMAX] = 461;
-	X_us[ossegm3+FCMAX] = 31; Y_us[ossegm3+FCMAX] = 461;
-	X_us[ossegm4+FCMAX] = 22; Y_us[ossegm4+FCMAX] = 473;
-	X_us[ossegm5+FCMAX] = 10; Y_us[ossegm5+FCMAX] = 484;
-	X_us[ossegm6+FCMAX] = 31; Y_us[ossegm6+FCMAX] = 484;
-	X_us[ossegm7+FCMAX] = 22; Y_us[ossegm7+FCMAX] = 494;
+	X_us[ossegm1+SGMAX] = 22; Y_us[ossegm1+SGMAX] = 452;
+	X_us[ossegm2+SGMAX] = 10; Y_us[ossegm2+SGMAX] = 461;
+	X_us[ossegm3+SGMAX] = 31; Y_us[ossegm3+SGMAX] = 461;
+	X_us[ossegm4+SGMAX] = 22; Y_us[ossegm4+SGMAX] = 473;
+	X_us[ossegm5+SGMAX] = 10; Y_us[ossegm5+SGMAX] = 484;
+	X_us[ossegm6+SGMAX] = 31; Y_us[ossegm6+SGMAX] = 484;
+	X_us[ossegm7+SGMAX] = 22; Y_us[ossegm7+SGMAX] = 494;
 
 	X_is[d01_1] = 287; Y_is[d01_1] = 210;
 	X_is[d01_2] = 374; Y_is[d01_2] = 210;

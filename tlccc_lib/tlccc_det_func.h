@@ -27,7 +27,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define TLCCC_DETFUNC_H_INCLUDED
 
 #include "tlccc_main.h"
-#include "tlccc_fc_func.h"
+#include "tlccc_sg_func.h"
 #include "tlccc_timer_func.h"
 
 void Detector_init(DETECTOR * detector, const char * code, short * cif_is_val, short type, short request, short extend, short tdbmax, short tdhmax, short togmax, short tbgmax);
@@ -59,7 +59,7 @@ struct DETECTOR_STRUCT
 
 	/* Info */
 	char * Code;
-	PHASE * Phase;
+	SIGNALGROUP * SignalGroup;
 };
 
 #define DET_EXT_NONE    0

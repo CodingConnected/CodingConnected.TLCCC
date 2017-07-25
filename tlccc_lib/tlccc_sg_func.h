@@ -32,20 +32,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "tlccc_det_func.h"
 #include "tlccc_clock.h"
 
-void Phase_init(PHASE * phase, const char * code, short index, short tggmax, short tgfmax, short tgemax, short tyemax, short trgmax, short headmax);
-void Phase_free(PHASE * phase);
-void Phases_free(PHASE phases[], short phases_count);
-void Phase_add_detectors(PHASE * phase, short detectors_count, ...);
-void Phase_conflict_init(short phc1, short phc2, short conflictstable[], short phases_count, short clearingtime);
-void Phases_set_conflict_pointers(PHASE phases[], short phases_count, short conflictstable[]);
-void Phases_timers_update(PHASE phases[], short phases_count, CLOCK * clock);
-void Phase_timers_update(PHASE * phase, CLOCK * clock);
-void Phases_requests(PHASE phases[], short phases_count);
-void Phases_extending(PHASE phases[], short phases_count);
-void Phases_state_update_ML(PHASE phases[], short phases_count, short * cif_guswijz);
-void Phases_state_update_FIX(PHASE phases[], short phases_count, short * cif_guswijz);
-void Phases_state_out_update(PHASE phases[], short phases_count);
-void Phases_update_conflicts(PHASE phases[], short phases_count);
+void SignalGroup_init(SIGNALGROUP * signalgroup, const char * code, short index, short tggmax, short tgfmax, short tgemax, short tyemax, short trgmax, short headmax);
+void SignalGroup_free(SIGNALGROUP * signalgroup);
+void SignalGroups_free(SIGNALGROUP signalgroups[], short signalgroups_count);
+void SignalGroup_add_detectors(SIGNALGROUP * signalgroups, short detectors_count, ...);
+void SignalGroup_conflict_init(short sgc1, short sgc2, short conflictstable[], short signalgroups_count, short clearingtime);
+void SignalGroups_set_conflict_pointers(SIGNALGROUP signalgroups[], short signalgroups_count, short conflictstable[]);
+void SignalGroups_timers_update(SIGNALGROUP signalgroups[], short signalgroups_count, CLOCK * clock);
+void SignalGroup_timers_update(SIGNALGROUP * signalgroup, CLOCK * clock);
+void SignalGroups_requests(SIGNALGROUP signalgroups[], short signalgroups_count);
+void SignalGroups_extending(SIGNALGROUP signalgroups[], short signalgroups_count);
+void SignalGroups_state_update_ML(SIGNALGROUP signalgroups[], short signalgroups_count, short * cif_guswijz);
+void SignalGroups_state_update_FIX(SIGNALGROUP signalgroups[], short signalgroups_count, short * cif_guswijz);
+void SignalGroups_state_out_update(SIGNALGROUP signalgroups[], short signalgroups_count);
+void SignalGroups_update_conflicts(SIGNALGROUP signalgroups[], short signalgroups_count);
 
 #define PRIMAIRY_REAL_MAX 3
 #define ALTERNATIVE_REAL_MAX 3
@@ -53,10 +53,10 @@ void Phases_update_conflicts(PHASE phases[], short phases_count);
 struct CONFLICT_STRUCT
 {
 	TIMER Timer_clearing;
-	PHASE * ConflictPhase;
+	SIGNALGROUP * ConflictingSignalGroup;
 };
 
-struct PHASE_STRUCT
+struct SIGNALGROUP_STRUCT
 {
 	/* State */
 	short CycleState;

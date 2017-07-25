@@ -47,12 +47,12 @@ static void BitmapperControlPaint(HWND hWnd, int fcmax, int dpmax)
 	{
 		if (bInternalState)
 		{
-			if (Phases_internal_state[i] < STATE_MAX)
+			if (SignalGroups_internal_state[i] < STATE_MAX)
 			{
-				if (Phases_internal_state_alt[i])
-					SelectObject(memHdc, CGBrushes_alt[Phases_internal_state[i]]);
+				if (SignalGroups_internal_state_alt[i])
+					SelectObject(memHdc, CGBrushes_alt[SignalGroups_internal_state[i]]);
 				else
-					SelectObject(memHdc, CGBrushes[Phases_internal_state[i]]);
+					SelectObject(memHdc, CGBrushes[SignalGroups_internal_state[i]]);
 			}
 			ExtFloodFill(memHdc, X_us[i], Y_us[i], 0x000000, FLOODFILLBORDER);
 		}

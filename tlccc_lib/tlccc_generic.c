@@ -25,7 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "tlccc_generic.h"
 
-//void TLCCC_free_all(short phases_count)
+//void TLCCC_free_all(short signalgroups_count)
 //{
-//	Phase_free
+//	SignalGroup_free
 //}

@@ -147,7 +147,7 @@
     <ClInclude Include="CIF_INC.h" />
     <ClInclude Include="tlccc_cif.h" />
     <ClInclude Include="tlccc_det_func.h" />
-    <ClInclude Include="tlccc_fc_func.h" />
+    <ClInclude Include="tlccc_sg_func.h" />
     <ClInclude Include="tlccc_clock.h" />
     <ClInclude Include="tlccc_generic.h" />
     <ClInclude Include="tlccc_main.h" />
@@ -160,7 +160,7 @@
   <ItemGroup>
     <ClCompile Include="tlccc_cif.c" />
     <ClCompile Include="tlccc_det_func.c" />
-    <ClCompile Include="tlccc_fc_func.c" />
+    <ClCompile Include="tlccc_sg_func.c" />
     <ClCompile Include="tlccc_clock.c" />
     <ClCompile Include="tlccc_generic.c" />
     <ClCompile Include="tlccc_modules_func.c" />

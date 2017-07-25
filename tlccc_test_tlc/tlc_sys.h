@@ -26,23 +26,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 #ifndef TLC_H_INCLUDED
 #define TLC_H_INCLUDED
 
-/* Defines for */
-
-#define fc01   0
-#define fc02   1
-#define fc03   2
-#define fc05   3
-#define fc06   4
-#define fc07   5
-#define fc08   6
-#define fc09   7
-#define fc11   8
-#define fc12   9
-#define fc24  10
-#define fc28  11
-#define fc34  12
-#define fc38  13
-#define FCMAX 14
+#define sg01   0
+#define sg02   1
+#define sg03   2
+#define sg05   3
+#define sg06   4
+#define sg07   5
+#define sg08   6
+#define sg09   7
+#define sg11   8
+#define sg12   9
+#define sg24  10
+#define sg28  11
+#define sg34  12
+#define sg38  13
+#define SGMAX 14
 
 #define ossegm1 0
 #define ossegm2 1
@@ -51,7 +49,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define ossegm5 4
 #define ossegm6 5
 #define ossegm7 6
-#define USMAX   FCMAX+7
+#define OSMAX   SGMAX+7
 
 #define d01_1 0
 #define d01_2 1
@@ -81,13 +79,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define dk34b 25
 #define dk38a 26
 #define dk38b 27
-#define DPMAX 28
+#define DMAX 28
 
-#define ISMAX DPMAX+0
+#define ISMAX DMAX+0
 
 #define TMMAX 1
 
-#define SCHMAX 1
+#define SWMAX 1
 
 #define PRMMAX 1
 
@@ -100,7 +98,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 /* YATLCCLC includes */
 #include "tlccc_main.h"
 #include "tlccc_clock.h"
-#include "tlccc_fc_func.h"
+#include "tlccc_sg_func.h"
 #include "tlccc_det_func.h"
 #include "tlccc_timer_func.h"
 #include "tlccc_modules_func.h"
@@ -109,7 +107,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "tlccc_cif.h"
 
 /* Function declarations */
-void application_init(PHASE phases[], DETECTOR detectors[], OUTGOING_SIGNAL os[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock);
+void application_init(SIGNALGROUP signalgroups[], DETECTOR detectors[], OUTGOING_SIGNAL os[], MODULEMILL * modulemill, MODULE modules[], CLOCK * clock);
 void application_exit(void);
 
 #endif // TLC_H_INCLUDED

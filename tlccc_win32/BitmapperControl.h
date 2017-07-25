@@ -53,7 +53,7 @@ extern HBRUSH CGBrushes_out[];
 extern struct IS_STRUCT * inputs;
 //extern "C"
 //{
-	extern short Phases_internal_state[];
-	extern short Phases_internal_state_alt[];
+	extern short SignalGroups_internal_state[];
+	extern short SignalGroups_internal_state_alt[];
 //}
 extern char bInternalState;

@@ -25,26 +25,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "tlccc_modules_func.h"
 
-void Module_init(MODULE * module, short index, char * code, short phases_count, ...)
+void Module_init(MODULE * module, short index, char * code, short signalgroups_count, ...)
 {
 	module->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
 	snprintf(module->Code, strlen(code) + 1, "%s", code);
 
-	if (phases_count > 0)
+	if (signalgroups_count > 0)
 	{
 		va_list a_list;
 		int i;
 
-		module->Phases = malloc(phases_count * sizeof(PHASE *));
-		va_start(a_list, phases_count);
+		module->SignalGroups = malloc(signalgroups_count * sizeof(SIGNALGROUP *));
+		va_start(a_list, signalgroups_count);
 
-		module->Phases_count = phases_count;
+		module->SignalGroups_count = signalgroups_count;
 		module->Index = index;
 
-		for (i = 0; i < phases_count; ++i)
+		for (i = 0; i < signalgroups_count; ++i)
 		{
-			PHASE * p = va_arg(a_list, PHASE *);
-			module->Phases[i] = p;
+			SIGNALGROUP * p = va_arg(a_list, SIGNALGROUP *);
+			module->SignalGroups[i] = p;
 			if (p->Modules_primary_count < PRIMAIRY_REAL_MAX)
 			{
 				p->Module_primary[p->Modules_primary_count] = module;
@@ -75,8 +75,8 @@ void Module_free(MODULE * module)
 	if (module->Code != NULL)
 		free(module->Code);
 
-	if (module->Phases != NULL)
-		free(module->Phases);
+	if (module->SignalGroups != NULL)
+		free(module->SignalGroups);
 }
 
 void ModuleMill_init(MODULEMILL * modulemill, MODULE modules[], short modules_count, short waiting_module)
@@ -104,12 +104,12 @@ void ModuleMill_init(MODULEMILL * modulemill, MODULE modules[], short modules_co
 	modulemill->Modules_count = modules_count;
 }
 
-void Modules_set_alternative_space_default(PHASE phases[], short phases_count, short space)
+void Modules_set_alternative_space_default(SIGNALGROUP signalgroups[], short signalgroups_count, short space)
 {
 	int i;
-	for (i = 0; i < phases_count; ++i)
+	for (i = 0; i < signalgroups_count; ++i)
 	{
-		phases[i].ML_Alt_Space = space;
+		signalgroups[i].ML_Alt_Space = space;
 	}
 }
 
@@ -119,45 +119,45 @@ void Modules_update_primary(MODULEMILL * modulemill)
 	int k;
 	char ModGreenStarted = FALSE;
 	
-	/* Determine if the module has really begun: one or more phases green */
-	for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
+	/* Determine if the module has really begun: one or more signalgroups green */
+	for (k = 0; k < modulemill->Modules[i]->SignalGroups_count; ++k)
 	{
-		if (modulemill->Modules[i]->Phases[k]->State_out != SO_RED)
+		if (modulemill->Modules[i]->SignalGroups[k]->State_out != SO_RED)
 		{
 			ModGreenStarted = TRUE;
 			break;
 		}
 	}
 
-	/* Set phases ML primary realisation state */
-	for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
+	/* Set signalgroups ML primary realisation state */
+	for (k = 0; k < modulemill->Modules[i]->SignalGroups_count; ++k)
 	{
-		/* Set primary realisation: phase may realize */
-		if ((modulemill->Modules[i]->Phases[k]->Request) &&
-			!(modulemill->Modules[i]->Phases[k]->ML_Primary_done))
+		/* Set primary realisation: signalgroup may realize */
+		if ((modulemill->Modules[i]->SignalGroups[k]->Request) &&
+			!(modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done))
 		{
-			modulemill->Modules[i]->Phases[k]->ML_Primary = TRUE;
+			modulemill->Modules[i]->SignalGroups[k]->ML_Primary = TRUE;
 		}
-		/* Set primary realisation done if phase is in primary green */
-		if ((modulemill->Modules[i]->Phases[k]->State_out == SO_GREEN) &&
-			(modulemill->Modules[i]->Phases[k]->ML_Primary) &&
-			!(modulemill->Modules[i]->Phases[k]->ML_Primary_done))
+		/* Set primary realisation done if signalgroup is in primary green */
+		if ((modulemill->Modules[i]->SignalGroups[k]->State_out == SO_GREEN) &&
+			(modulemill->Modules[i]->SignalGroups[k]->ML_Primary) &&
+			!(modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done))
 		{
-			modulemill->Modules[i]->Phases[k]->ML_Primary_done |= PR_REAL;
+			modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done |= PR_REAL;
 		}
 	}
 	
-	/* Set phases ML skipped primary realisation */
+	/* Set signalgroups ML skipped primary realisation */
 	if (ModGreenStarted)
 	{
-		for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
+		for (k = 0; k < modulemill->Modules[i]->SignalGroups_count; ++k)
 		{
-			if (!modulemill->Modules[i]->Phases[k]->ML_Primary_done && !modulemill->Modules[i]->Phases[k]->Request)
+			if (!modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done && !modulemill->Modules[i]->SignalGroups[k]->Request)
 			{
 				int l, m = TRUE;
-				for (l = 0; l < modulemill->Modules[i]->Phases_count; ++l)
+				for (l = 0; l < modulemill->Modules[i]->SignalGroups_count; ++l)
 				{
-					if (!modulemill->Modules[i]->Phases[k]->ML_Primary_done && modulemill->Modules[i]->Phases[k]->Request)
+					if (!modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done && modulemill->Modules[i]->SignalGroups[k]->Request)
 					{
 						m = FALSE;
 						break;
@@ -165,68 +165,68 @@ void Modules_update_primary(MODULEMILL * modulemill)
 				}
 				if (m)
 				{
-					modulemill->Modules[i]->Phases[k]->ML_Primary_done |= PR_SKIP;
+					modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done |= PR_SKIP;
 				}
 			}
 		}
 	}
 }
 
-void Modules_update_alternative(MODULEMILL * modulemill, PHASE phases[], short phases_count)
+void Modules_update_alternative(MODULEMILL * modulemill, SIGNALGROUP signalgroups[], short signalgroups_count)
 {
 	int i, k, l;
-	for (k = 0; k < phases_count; ++k)
+	for (k = 0; k < signalgroups_count; ++k)
 	{
-		if (phases[k].Request && !phases[k].ML_Primary && !phases[k].HasConflict)
+		if (signalgroups[k].Request && !signalgroups[k].ML_Primary && !signalgroups[k].HasConflict)
 		{
-			phases[k].ML_Alternative |= AR_REAL_POSSIBLE;
+			signalgroups[k].ML_Alternative |= AR_REAL_POSSIBLE;
 		}
 	}
 	/* Check for remaining space */
-	for (k = 0; k < phases_count; ++k)
+	for (k = 0; k < signalgroups_count; ++k)
 	{
-		if (phases[k].ML_Alternative & AR_REAL_POSSIBLE)
+		if (signalgroups[k].ML_Alternative & AR_REAL_POSSIBLE)
 		{
 			/* TODO: needs more intelligence: take into account clearing times, yellow, etc */
 			char alt = FALSE;
-			for (l = 0; l < phases_count; ++l)
+			for (l = 0; l < signalgroups_count; ++l)
 			{
 				/* Skip conflicts */
-				for (i = 0; i < phases[k].Conflict_count; ++i)
+				for (i = 0; i < signalgroups[k].Conflict_count; ++i)
 				{
-					if (phases[k].Conflicts[i]->ConflictPhase->Index == phases[l].Index)
+					if (signalgroups[k].Conflicts[i]->ConflictingSignalGroup->Index == signalgroups[l].Index)
 						continue;
 				}
 				/* Check space */
-				if (phases[l].ML_Primary_active &&
-					(phases[l].CycleState > NEXTRED && phases[l].CycleState < EXTENDGREEN ||
-					 phases[l].CycleState == EXTENDGREEN && phases[l].Timer_GE.Remaining > phases[k].ML_Alt_Space))
+				if (signalgroups[l].ML_Primary_active &&
+					(signalgroups[l].CycleState > NEXTRED && signalgroups[l].CycleState < EXTENDGREEN ||
+					 signalgroups[l].CycleState == EXTENDGREEN && signalgroups[l].Timer_GE.Remaining > signalgroups[k].ML_Alt_Space))
 				{
 					alt = TRUE;
 					break;
 				}
 			}
 			if (!alt)
-				phases[k].ML_Alternative &= ~AR_REAL_POSSIBLE;
+				signalgroups[k].ML_Alternative &= ~AR_REAL_POSSIBLE;
 		}
 	}
 	/* Check longer waiting conflicting alternatives */
-	for (k = 0; k < phases_count; ++k)
+	for (k = 0; k < signalgroups_count; ++k)
 	{
-		if (phases[k].ML_Alternative & AR_REAL_POSSIBLE)
+		if (signalgroups[k].ML_Alternative & AR_REAL_POSSIBLE)
 		{
-			for (l = 0; l < phases[k].Conflict_count; ++l)
+			for (l = 0; l < signalgroups[k].Conflict_count; ++l)
 			{
-				if (phases[k].Conflicts[l]->ConflictPhase->Module_primary[0]->Index == modulemill->ActiveModule_index &&
-					phases[k].Conflicts[l]->ConflictPhase->ML_Primary && !phases[k].Conflicts[l]->ConflictPhase->ML_Primary_done ||
-					phases[k].Conflicts[l]->ConflictPhase->ML_Alternative && phases[k].Conflicts[l]->ConflictPhase->Timer_PG_act > phases[k].Timer_PG_act)
-					phases[k].ML_Alternative &= ~AR_REAL_POSSIBLE;
+				if (signalgroups[k].Conflicts[l]->ConflictingSignalGroup->Module_primary[0]->Index == modulemill->ActiveModule_index &&
+					signalgroups[k].Conflicts[l]->ConflictingSignalGroup->ML_Primary && !signalgroups[k].Conflicts[l]->ConflictingSignalGroup->ML_Primary_done ||
+					signalgroups[k].Conflicts[l]->ConflictingSignalGroup->ML_Alternative && signalgroups[k].Conflicts[l]->ConflictingSignalGroup->Timer_PG_act > signalgroups[k].Timer_PG_act)
+					signalgroups[k].ML_Alternative &= ~AR_REAL_POSSIBLE;
 			}
 		}
 	}
 }
 
-void Modules_move_the_mill(MODULEMILL * modulemill, PHASE phases[], short phases_count)
+void Modules_move_the_mill(MODULEMILL * modulemill, SIGNALGROUP signalgroups[], short signalgroups_count)
 {
 	int i = modulemill->ActiveModule_index;
 	int k;
@@ -234,19 +234,19 @@ void Modules_move_the_mill(MODULEMILL * modulemill, PHASE phases[], short phases
 
 	/* Set current module state */
 	modulemill->Modules[i]->AllRealised = TRUE;
-	for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
+	for (k = 0; k < modulemill->Modules[i]->SignalGroups_count; ++k)
 	{
-		/* Check if all phases with requests have realised */
-		if (modulemill->Modules[i]->Phases[k]->Request && !modulemill->Modules[i]->Phases[k]->ML_Primary_done)
+		/* Check if all signalgroups with requests have realised */
+		if (modulemill->Modules[i]->SignalGroups[k]->Request && !modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done)
 		{
 			modulemill->Modules[i]->AllRealised = FALSE;
 			break;
 		}
-		/* Check if all phases that are green are ready to move */
-		if (modulemill->Modules[i]->Phases[k]->ML_Primary_done && 
-			!(modulemill->Modules[i]->Phases[k]->State_out == SO_RED ||
-		      modulemill->Modules[i]->Phases[k]->CycleState == FREEEXGREEN || 
-			  modulemill->Modules[i]->Phases[k]->CycleState == YELLOW))
+		/* Check if all signalgroups that are green are ready to move */
+		if (modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done && 
+			!(modulemill->Modules[i]->SignalGroups[k]->State_out == SO_RED ||
+		      modulemill->Modules[i]->SignalGroups[k]->CycleState == FREEEXGREEN || 
+			  modulemill->Modules[i]->SignalGroups[k]->CycleState == YELLOW))
 		{
 			modulemill->Modules[i]->AllRealised = FALSE;
 			break;
@@ -259,18 +259,18 @@ void Modules_move_the_mill(MODULEMILL * modulemill, PHASE phases[], short phases
 		int wait = TRUE;
 
 		/* Reset flags for the current module */
-		for (k = 0; k < modulemill->Modules[i]->Phases_count; ++k)
+		for (k = 0; k < modulemill->Modules[i]->SignalGroups_count; ++k)
 		{
-			modulemill->Modules[i]->Phases[k]->ML_Primary = FALSE;
-			modulemill->Modules[i]->Phases[k]->ML_Primary_done = FALSE;
+			modulemill->Modules[i]->SignalGroups[k]->ML_Primary = FALSE;
+			modulemill->Modules[i]->SignalGroups[k]->ML_Primary_done = FALSE;
 		}
 
 		/* Check if we wait in the waiting module */
 		if (modulemill->ActiveModule_index == modulemill->WaitingModule_index)
 		{
-			for (k = 0; k < phases_count; ++k)
+			for (k = 0; k < signalgroups_count; ++k)
 			{
-				if (phases[k].Request)
+				if (signalgroups[k].Request)
 				{
 					wait = FALSE;
 				}

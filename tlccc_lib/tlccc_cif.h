@@ -27,9 +27,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define TLCCC_CIF_H_INCLUDED
 
 #include "tlccc_main.h"
-#include "tlccc_fc_func.h"
+#include "tlccc_sg_func.h"
 #include "tlccc_os_func.h"
 
-void Set_GUS(PHASE phases[], short phases_count, OUTGOING_SIGNAL os[], short os_count);
+void Set_GUS(SIGNALGROUP signalgroups[], short signalgroups_count, OUTGOING_SIGNAL os[], short os_count);
 
 #endif // TLCCC_CIF_H_INCLUDED

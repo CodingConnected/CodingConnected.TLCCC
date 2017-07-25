@@ -24,9 +24,6 @@
     <ClInclude Include="tlccc_det_func.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tlccc_fc_func.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tlccc_generic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,6 +48,9 @@
     <ClInclude Include="CIF_INC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tlccc_sg_func.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tlccc_cif.c">
@@ -60,9 +60,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tlccc_det_func.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tlccc_fc_func.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tlccc_generic.c">
@@ -81,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tlccc_timer_func.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tlccc_sg_func.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

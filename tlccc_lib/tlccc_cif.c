@@ -25,21 +25,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "tlccc_cif.h"
 
-void Set_GUS(PHASE phases[], short phases_count, OUTGOING_SIGNAL os[], short os_count)
+void Set_GUS(SIGNALGROUP signalgroups[], short signalgroups_count, OUTGOING_SIGNAL os[], short os_count)
 {
 	int i;
-	for (i = 0; i < phases_count; ++i)
+	for (i = 0; i < signalgroups_count; ++i)
 	{
-		switch (phases[i].State_out)
+		switch (signalgroups[i].State_out)
 		{
 		case SO_RED:
-			CIF_GUS[phases[i].Index] = CIF_ROOD;
+			CIF_GUS[signalgroups[i].Index] = CIF_ROOD;
 			break;
 		case SO_YELLOW:
-			CIF_GUS[phases[i].Index] = CIF_GEEL;
+			CIF_GUS[signalgroups[i].Index] = CIF_GEEL;
 			break;
 		case SO_GREEN:
-			CIF_GUS[phases[i].Index] = CIF_GROEN;
+			CIF_GUS[signalgroups[i].Index] = CIF_GROEN;
 			break;
 		}
 	}

@@ -28,17 +28,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "tlccc_main.h"
 #include "tlccc_clock.h"
-#include "tlccc_fc_func.h"
+#include "tlccc_sg_func.h"
 #include "tlccc_os_func.h"
 
-void Module_init(MODULE * module, short index, char * code, short phases_count, ...);
+void Module_init(MODULE * module, short index, char * code, short signalgroups_count, ...);
 void Module_free(MODULE * module);
 void ModuleMill_init(MODULEMILL * modulemill, MODULE modules[], short modules_count, short waiting_module);
 void ModuleMill_free(MODULEMILL * modulemill, short modules_count);
 void Modules_update_primary(MODULEMILL * modulemill);
-void Modules_update_alternative(MODULEMILL * modulemill, PHASE phases[], short phases_count);
-void Modules_move_the_mill(MODULEMILL * modulemill, PHASE phases[], short phases_count);
-void Modules_set_alternative_space_default(PHASE phases[], short phases_count, short space);
+void Modules_update_alternative(MODULEMILL * modulemill, SIGNALGROUP signalgroups[], short signalgroups_count);
+void Modules_move_the_mill(MODULEMILL * modulemill, SIGNALGROUP signalgroups[], short signalgroups_count);
+void Modules_set_alternative_space_default(SIGNALGROUP signalgroups[], short signalgroups_count, short space);
 void Modules_update_segment_display(MODULEMILL * modulemill, OUTGOING_SIGNAL os[], short index, short * cif_guswijz);
 
 struct MODULE_STRUCT
@@ -52,8 +52,8 @@ struct MODULE_STRUCT
 
 	/* Information */
 	char * Code;
-	PHASE ** Phases;
-	short Phases_count;
+	SIGNALGROUP ** SignalGroups;
+	short SignalGroups_count;
 };
 
 struct MODULEMILL_STRUCT

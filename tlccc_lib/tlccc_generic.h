@@ -27,7 +27,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define TLCCC_GENERIC_H_INCLUDED
 
 #include "tlccc_main.h"
-#include "tlccc_fc_func.h"
+#include "tlccc_sg_func.h"
 #include "tlccc_det_func.h"
 #include "tlccc_timer_func.h"
 #include "tlccc_modules_func.h"
@@ -36,6 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include "tlccc_switch_func.h"
 #include "tlccc_timer_func.h"
 
-void TLCCC_free_all(short phases_count);
+void TLCCC_free_all(short signalgroups_count);
 
 #endif // TLCCC_GENERIC_H_INCLUDED

@@ -32,10 +32,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <stdarg.h>     /* va_list, va_start, va_arg, va_end */
 
 #ifdef CIF_PUBLIC 
-    #define CIF_AANT_IS_D  DPMAX
-    #define CIF_AANT_IS_OV ISMAX-DPMAX
-    #define CIF_AANT_US_FC FCMAX
-    #define CIF_AANT_US_OV USMAX-FCMAX
+    #define CIF_AANT_IS_D  DMAX
+    #define CIF_AANT_IS_OV ISMAX-DMAX
+    #define CIF_AANT_US_FC SGMAX
+    #define CIF_AANT_US_OV OSMAX-SGMAX
     
     #define CIF_MAX_IBER 1024
     #define CIF_MAX_UBER 4096
@@ -49,7 +49,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "CIF_INC.h"
 
-#define PHASE struct PHASE_STRUCT 
+#define SIGNALGROUP struct SIGNALGROUP_STRUCT 
 #define DETECTOR struct DETECTOR_STRUCT 
 #define CLOCK struct CLOCK_STRUCT
 #define TIMER struct TIMER_STRUCT
@@ -63,9 +63,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define FALSE 0
 #define TRUE  1
 
-enum DetectorTypes { D_HEAD, D_LONG, D_AWAY, D_JAM, D_BUTTON, DETTYPE_MAX };
-enum PhaseStates { WAITRED, NEXTRED, PREGREEN, FIXEDGREEN, WAITGREEN, EXTENDGREEN, FREEEXGREEN, YELLOW, STATE_MAX };
-enum PhaseStatesOut { SO_RED, SO_GREEN, SO_YELLOW, STATE_OUT_MAX};
+enum DetectorTypes { D_HEAD, D_LONG, D_AWAY, D_JAM, D_BUTTON, D_OTHER, DETTYPE_MAX };
+enum SignalGroupStates { WAITRED, NEXTRED, PREGREEN, FIXEDGREEN, WAITGREEN, EXTENDGREEN, FREEEXGREEN, YELLOW, STATE_MAX };
+enum SignalGroupStatesOut { SO_RED, SO_GREEN, SO_YELLOW, STATE_OUT_MAX};
 enum TimeTypes { TE_type, TS_type, TM_type };
 
 #endif // TLCCC_MAIN_H_INCLUDED

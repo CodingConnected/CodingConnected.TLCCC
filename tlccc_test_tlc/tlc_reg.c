@@ -30,19 +30,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 static char running = TRUE;
 
 /* YATLCCLC variables */
-PHASE phases[FCMAX] = { 0 };
-OUTGOING_SIGNAL outging_signals[USMAX] = { 0 };
-DETECTOR detectors[DPMAX] = { 0 };
+SIGNALGROUP signalgroups[SGMAX] = { 0 };
+OUTGOING_SIGNAL outging_signals[OSMAX] = { 0 };
+DETECTOR detectors[DMAX] = { 0 };
 TIMER timers[TMMAX] = { 0 };
 MODULE modules[MLMAX] = { 0 };
-SWITCH switches[SCHMAX] = { 0 };
+SWITCH switches[SWMAX] = { 0 };
 PARAMETER parameters[PRMMAX] = { 0 };
 MODULEMILL modulemill = { 0 };
 CLOCK clock = { 0 };
 
 #ifdef YATLCCLC_WIN32
-	short Phases_internal_state[FCMAX];
-	short Phases_internal_state_alt[FCMAX];
+	short SignalGroups_internal_state[SGMAX];
+	short SignalGroups_internal_state_alt[SGMAX];
 #endif
 
 s_int16 applicatieprogramma(s_int16 state)
@@ -51,7 +51,7 @@ s_int16 applicatieprogramma(s_int16 state)
     if (state == CIF_INIT)
     {
         /* Initialize */
-        application_init(phases, detectors, outging_signals, &modulemill, modules, &clock);
+        application_init(signalgroups, detectors, outging_signals, &modulemill, modules, &clock);
     }
 	else if(running == TRUE)
 	{
@@ -65,7 +65,7 @@ s_int16 applicatieprogramma(s_int16 state)
 			CIF_WUSWIJZ = FALSE;
 		}
 		// TODO: process other inputs
-		Detectors_update(detectors, DPMAX);
+		Detectors_update(detectors, DMAX);
 		if (CIF_PARM1WIJZPB)
 		{
 			// TODO
@@ -73,37 +73,37 @@ s_int16 applicatieprogramma(s_int16 state)
 
 		/* Update clock and timers */
 		Clock_update(&clock);
-		Phases_timers_update(phases, FCMAX, &clock);
-		Detectors_timers_update(detectors, DPMAX, &clock);
+		SignalGroups_timers_update(signalgroups, SGMAX, &clock);
+		Detectors_timers_update(detectors, DMAX, &clock);
 		Timers_update(timers, TMMAX, &clock);
 
 		/* Update state */
-		Phases_requests(phases, FCMAX);
+		SignalGroups_requests(signalgroups, SGMAX);
 		// TODO: update waiting green (later)
-		Phases_extending(phases, FCMAX);
+		SignalGroups_extending(signalgroups, SGMAX);
 		// TODO: update free extending
-		Phases_update_conflicts(phases, FCMAX);
+		SignalGroups_update_conflicts(signalgroups, SGMAX);
 		
 		Modules_update_primary(&modulemill);
-		//Modules_update_alternative(&modulemill, phases, FCMAX);
-		Phases_state_update_ML(phases, FCMAX, &CIF_GUSWIJZ);
-		Modules_move_the_mill(&modulemill, phases, FCMAX);
+		//Modules_update_alternative(&modulemill, signalgroups, FCMAX);
+		SignalGroups_state_update_ML(signalgroups, SGMAX, &CIF_GUSWIJZ);
+		Modules_move_the_mill(&modulemill, signalgroups, SGMAX);
 
 		Modules_update_segment_display(&modulemill, outging_signals, ossegm1, &CIF_GUSWIJZ);
 		
 		if (CIF_GUSWIJZ)
 		{
-			Phases_state_out_update(phases, FCMAX);
-			Set_GUS(phases, FCMAX, outging_signals, USMAX-FCMAX);
+			SignalGroups_state_out_update(signalgroups, SGMAX);
+			Set_GUS(signalgroups, SGMAX, outging_signals, OSMAX- SGMAX);
 		}
 
 #ifdef YATLCCLC_WIN32
 		/* Internal state to WIN32 environment */
 		int i;
-		for (i = 0; i < FCMAX; ++i)
+		for (i = 0; i < SGMAX; ++i)
 		{
-			Phases_internal_state[i] = phases[i].CycleState;
-			Phases_internal_state_alt[i] = phases[i].ML_Alternative;
+			SignalGroups_internal_state[i] = signalgroups[i].CycleState;
+			SignalGroups_internal_state_alt[i] = signalgroups[i].ML_Alternative;
 		}
 #endif
 		
@@ -120,10 +120,10 @@ void application_exit(void)
 	running = FALSE;
 
 	// Free all allocated memory; good programming practice!
-	Phases_free(phases, FCMAX);
-	Detectors_free(detectors, DPMAX);
+	SignalGroups_free(signalgroups, SGMAX);
+	Detectors_free(detectors, DMAX);
 	ModuleMill_free(&modulemill, MLMAX);
 	Parameters_free(parameters, PRMMAX);
 	Timers_free(timers, TMMAX);
-	Switches_free(switches, SCHMAX);
+	Switches_free(switches, SWMAX);
 }

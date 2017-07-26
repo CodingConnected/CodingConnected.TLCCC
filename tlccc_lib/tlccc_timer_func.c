@@ -28,78 +28,78 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 void Timer_init(TIMER * timer, char * code, short maximum, short t_type)
 {
-	timer->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
-	snprintf(timer->Code, strlen(code) + 1, "%s", code);
+    timer->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
+    snprintf(timer->Code, strlen(code) + 1, "%s", code);
 
-	timer->Maximum = maximum;
-	timer->TimeType = t_type;
+    timer->Maximum = maximum;
+    timer->TimeType = t_type;
 }
 
 void Timer_free(TIMER * timer)
 {
-	if (timer->Code != NULL)
-		free(timer->Code);
+    if (timer->Code != NULL)
+        free(timer->Code);
 }
 
 void Timers_free(TIMER timers[], short timers_count)
 {
-	int i;
-	for (i = 0; i < timers_count; ++i)
-	{
-		Timer_free(&timers[i]);
-	}
+    int i;
+    for (i = 0; i < timers_count; ++i)
+    {
+        Timer_free(&timers[i]);
+    }
 }
 
 void Timers_update(TIMER timers[], int timers_count, CLOCK * clock)
 {
-	int i;
-	for (i = 0; i < timers_count; ++i)
-	{
-		Timer_update(&timers[i], clock);
-	}
+    int i;
+    for (i = 0; i < timers_count; ++i)
+    {
+        Timer_update(&timers[i], clock);
+    }
 }
 
 void Timer_update(TIMER * timer, CLOCK * clock)
 {
-	timer->Started = timer->Ended = FALSE;
+    timer->Started = timer->Ended = FALSE;
 
-	if (timer->Start)
-	{
-		timer->Start = FALSE;
-		timer->Active = TRUE;
-		timer->Started = TRUE;
-	}
-	if (timer->Restart)
-	{
-		timer->Restart = FALSE;
-		timer->Current = 0;
-		timer->Active = TRUE;
-		timer->Started = TRUE;
-	}
-	if (timer->Stop)
-	{
-		timer->Active = FALSE;
-		timer->Stop = FALSE;
-	}
-	if (timer->Active)
-	{
-		if (clock->TE && timer->TimeType == TE_type)
-		{
-			timer->Current += clock->TE;
-		}
-		if (clock->TS && timer->TimeType == TS_type)
-		{
-			timer->Current += clock->TS;
-		}
-		if (clock->TM && timer->TimeType == TM_type)
-		{
-			timer->Current += clock->TM;
-		}
-		timer->Remaining = timer->Maximum - timer->Current;
-	}
-	if (timer->Active && timer->Current >= timer->Maximum)
-	{
-		timer->Ended = TRUE;
-		timer->Stop = TRUE;
-	}
+    if (timer->Start)
+    {
+        timer->Start = FALSE;
+        timer->Active = TRUE;
+        timer->Started = TRUE;
+    }
+    if (timer->Restart)
+    {
+        timer->Restart = FALSE;
+        timer->Current = 0;
+        timer->Active = TRUE;
+        timer->Started = TRUE;
+    }
+    if (timer->Stop)
+    {
+        timer->Active = FALSE;
+        timer->Stop = FALSE;
+    }
+    if (timer->Active)
+    {
+        if (clock->TE && timer->TimeType == TE_type)
+        {
+            timer->Current += clock->TE;
+        }
+        if (clock->TS && timer->TimeType == TS_type)
+        {
+            timer->Current += clock->TS;
+        }
+        if (clock->TM && timer->TimeType == TM_type)
+        {
+            timer->Current += clock->TM;
+        }
+        timer->Remaining = timer->Maximum - timer->Current;
+    }
+    if (timer->Active && timer->Current >= timer->Maximum)
+    {
+        timer->Ended = TRUE;
+        timer->Stop = TRUE;
+    }
 }

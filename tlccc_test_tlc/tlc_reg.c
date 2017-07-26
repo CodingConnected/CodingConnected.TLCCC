@@ -25,11 +25,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #define CIF_PUBLIC
 #define NO_CIF_MON
+
 #include "tlc_sys.h"
 
 static char running = TRUE;
 
-/* YATLCCLC variables */
+/* TLCCC variables */
 SIGNALGROUP signalgroups[SGMAX] = { 0 };
 OUTGOING_SIGNAL outging_signals[OSMAX] = { 0 };
 DETECTOR detectors[DMAX] = { 0 };
@@ -40,90 +41,90 @@ PARAMETER parameters[PRMMAX] = { 0 };
 MODULEMILL modulemill = { 0 };
 CLOCK clock = { 0 };
 
-#ifdef YATLCCLC_WIN32
-	short SignalGroups_internal_state[SGMAX];
-	short SignalGroups_internal_state_alt[SGMAX];
+#ifdef TLCCC_WIN32
+    short SignalGroups_internal_state[SGMAX];
+    short SignalGroups_internal_state_alt[SGMAX];
 #endif
 
 s_int16 applicatieprogramma(s_int16 state)
 {
-	
+    
     if (state == CIF_INIT)
     {
         /* Initialize */
         application_init(signalgroups, detectors, outging_signals, &modulemill, modules, &clock);
     }
-	else if(running == TRUE)
-	{
-		/* Read data from interface */
-		if (CIF_ISWIJZ)
-		{
-			CIF_ISWIJZ = FALSE;
-		}
-		if (CIF_WUSWIJZ)
-		{
-			CIF_WUSWIJZ = FALSE;
-		}
-		// TODO: process other inputs
-		Detectors_update(detectors, DMAX);
-		if (CIF_PARM1WIJZPB)
-		{
-			// TODO
-		}
+    else if(running == TRUE)
+    {
+        /* Read data from interface */
+        if (CIF_ISWIJZ)
+        {
+            CIF_ISWIJZ = FALSE;
+        }
+        if (CIF_WUSWIJZ)
+        {
+            CIF_WUSWIJZ = FALSE;
+        }
+        // TODO: process other inputs
+        Detectors_update(detectors, DMAX);
+        if (CIF_PARM1WIJZPB)
+        {
+            // TODO
+        }
 
-		/* Update clock and timers */
-		Clock_update(&clock);
-		SignalGroups_timers_update(signalgroups, SGMAX, &clock);
-		Detectors_timers_update(detectors, DMAX, &clock);
-		Timers_update(timers, TMMAX, &clock);
+        /* Update clock and timers */
+        Clock_update(&clock);
+        SignalGroups_timers_update(signalgroups, SGMAX, &clock);
+        Detectors_timers_update(detectors, DMAX, &clock);
+        Timers_update(timers, TMMAX, &clock);
 
-		/* Update state */
-		SignalGroups_requests(signalgroups, SGMAX);
-		// TODO: update waiting green (later)
-		SignalGroups_extending(signalgroups, SGMAX);
-		// TODO: update free extending
-		SignalGroups_update_conflicts(signalgroups, SGMAX);
-		
-		Modules_update_primary(&modulemill);
-		//Modules_update_alternative(&modulemill, signalgroups, FCMAX);
-		SignalGroups_state_update_ML(signalgroups, SGMAX, &CIF_GUSWIJZ);
-		Modules_move_the_mill(&modulemill, signalgroups, SGMAX);
+        /* Update state */
+        SignalGroups_requests(signalgroups, SGMAX);
+        // TODO: update waiting green (later)
+        SignalGroups_extending(signalgroups, SGMAX);
+        // TODO: update free extending
+        SignalGroups_update_conflicts(signalgroups, SGMAX);
+        
+        Modules_update_primary(&modulemill);
+        //Modules_update_alternative(&modulemill, signalgroups, FCMAX);
+        SignalGroups_state_update_ML(signalgroups, SGMAX, &CIF_GUSWIJZ);
+        Modules_move_the_mill(&modulemill, signalgroups, SGMAX);
 
-		Modules_update_segment_display(&modulemill, outging_signals, ossegm1, &CIF_GUSWIJZ);
-		
-		if (CIF_GUSWIJZ)
-		{
-			SignalGroups_state_out_update(signalgroups, SGMAX);
-			Set_GUS(signalgroups, SGMAX, outging_signals, OSMAX- SGMAX);
-		}
+        Modules_update_segment_display(&modulemill, outging_signals, ossegm1, &CIF_GUSWIJZ);
+        
+        if (CIF_GUSWIJZ)
+        {
+            SignalGroups_state_out_update(signalgroups, SGMAX);
+            Set_GUS(signalgroups, SGMAX, outging_signals, OSMAX- SGMAX);
+        }
 
-#ifdef YATLCCLC_WIN32
-		/* Internal state to WIN32 environment */
-		int i;
-		for (i = 0; i < SGMAX; ++i)
-		{
-			SignalGroups_internal_state[i] = signalgroups[i].CycleState;
-			SignalGroups_internal_state_alt[i] = signalgroups[i].ML_Alternative;
-		}
+#ifdef TLCCC_WIN32
+        /* Internal state to WIN32 environment */
+        int i;
+        for (i = 0; i < SGMAX; ++i)
+        {
+            SignalGroups_internal_state[i] = signalgroups[i].CycleState;
+            SignalGroups_internal_state_alt[i] = signalgroups[i].ML_Alternative;
+        }
 #endif
-		
-		// TODO: check if we need to copy params from tlccc to outside buffers
-	}
+        
+        // TODO: check if we need to copy params from tlccc to outside buffers
+    }
 
-	return 0;
+    return 0;
 }
 
 void application_exit(void)
 {
-	// Set running state to false, cause otherwise the application
-	// will try to access freed memory if running at high speeds
-	running = FALSE;
+    // Set running state to false, cause otherwise the application
+    // will try to access freed memory if running at high speeds
+    running = FALSE;
 
-	// Free all allocated memory; good programming practice!
-	SignalGroups_free(signalgroups, SGMAX);
-	Detectors_free(detectors, DMAX);
-	ModuleMill_free(&modulemill, MLMAX);
-	Parameters_free(parameters, PRMMAX);
-	Timers_free(timers, TMMAX);
-	Switches_free(switches, SWMAX);
+    // Free all allocated memory; good programming practice!
+    SignalGroups_free(signalgroups, SGMAX);
+    Detectors_free(detectors, DMAX);
+    ModuleMill_free(&modulemill, MLMAX);
+    Parameters_free(parameters, PRMMAX);
+    Timers_free(timers, TMMAX);
+    Switches_free(switches, SWMAX);
 }

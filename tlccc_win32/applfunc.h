@@ -30,7 +30,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 //extern "C"
 //{
-	#include "tlccc_main.h" /* Also include CIF_INC.h */
+    #include "tlccc_main.h" /* Also include CIF_INC.h */
 //}
 
 #include "tlccc_win32.h"

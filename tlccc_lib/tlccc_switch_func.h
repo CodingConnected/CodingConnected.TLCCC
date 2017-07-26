@@ -34,9 +34,9 @@ void Switches_free(SWITCH switches[], short switches_count);
 
 struct SWITCH_STRUCT
 {
-	char * Code;
+    char * Code;
 
-	short Setting;
+    short Setting;
 };
 
 #endif

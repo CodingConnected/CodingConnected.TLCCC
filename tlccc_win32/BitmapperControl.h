@@ -41,10 +41,10 @@ void BitmapperSetFilename(LPCSTR filename);
 
 //extern "C"
 //{
-	extern short X_is[];
-	extern short X_us[];
-	extern short Y_is[];
-	extern short Y_us[];
+    extern short X_is[];
+    extern short X_us[];
+    extern short Y_is[];
+    extern short Y_us[];
 //}
 
 extern HBRUSH CGBrushes[];
@@ -53,7 +53,7 @@ extern HBRUSH CGBrushes_out[];
 extern struct IS_STRUCT * inputs;
 //extern "C"
 //{
-	extern short SignalGroups_internal_state[];
-	extern short SignalGroups_internal_state_alt[];
+    extern short SignalGroups_internal_state[];
+    extern short SignalGroups_internal_state_alt[];
 //}
 extern char bInternalState;

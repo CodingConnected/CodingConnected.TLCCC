@@ -52,69 +52,69 @@ void SignalGroups_update_conflicts(SIGNALGROUP signalgroups[], short signalgroup
 
 struct CONFLICT_STRUCT
 {
-	TIMER Timer_clearing;
-	SIGNALGROUP * ConflictingSignalGroup;
+    TIMER Timer_clearing;
+    SIGNALGROUP * ConflictingSignalGroup;
 };
 
 struct SIGNALGROUP_STRUCT
 {
-	/* State */
-	short CycleState;
-	short State_out;
-	short Request;
-	short Extend;
-	short FreeExtend;
-	short StartGreen;
-	short StartGP;
-	short StartGF;
-	short StartGW;
-	short StartGE;
-	short StartGFR;
-	short StartYE;
-	short StartRG;
-	short EndGP;
-	short EndGF;
-	short EndGW;
-	short EndGE;
-	short EndGFR;
-	short EndYE;
-	short EndRG;
-	short EndGreen;
-	short StartRed;
-	short EndRed;
-	short StartYellow;
-	short EndYellow;
-	TIMER Timer_GG;
-	TIMER Timer_GF;
-	TIMER Timer_GE;
-	TIMER Timer_YE;
-	TIMER Timer_RG;
-	TIMER Timer_HeadMax;
-	short Timer_PG_act;
-	short HasConflict;
+    /* State */
+    short CycleState;
+    short State_out;
+    short Request;
+    short Extend;
+    short FreeExtend;
+    short StartGreen;
+    short StartGP;
+    short StartGF;
+    short StartGW;
+    short StartGE;
+    short StartGFR;
+    short StartYE;
+    short StartRG;
+    short EndGP;
+    short EndGF;
+    short EndGW;
+    short EndGE;
+    short EndGFR;
+    short EndYE;
+    short EndRG;
+    short EndGreen;
+    short StartRed;
+    short EndRed;
+    short StartYellow;
+    short EndYellow;
+    TIMER Timer_GG;
+    TIMER Timer_GF;
+    TIMER Timer_GE;
+    TIMER Timer_YE;
+    TIMER Timer_RG;
+    TIMER Timer_HeadMax;
+    short Timer_PG_act;
+    short HasConflict;
 
-	/* Modules state */
-	short ML_Primary;
-	short ML_Primary_active;
-	short ML_Primary_done;
-	short ML_Alternative;
-	short ML_Alt_Space;
+    /* Modules state */
+    short ML_Primary;
+    short ML_Primary_active;
+    short ML_Primary_done;
+    short ML_Alternative;
+    short ML_Alt_Space;
 
-	/* Settings */
-	SWITCH Fixed_request;
-	SWITCH Co_extend;
-	MODULE * Module_primary[PRIMAIRY_REAL_MAX];
-	short Modules_primary_count;
-	MODULE * Module_alternative[ALTERNATIVE_REAL_MAX];
-	short Modules_alternative_count;
+    /* Settings */
+    SWITCH Fixed_request;
+    SWITCH Co_extend;
+    MODULE * Module_primary[PRIMAIRY_REAL_MAX];
+    short Modules_primary_count;
+    MODULE * Module_alternative[ALTERNATIVE_REAL_MAX];
+    short Modules_alternative_count;
 
-	/* Info */
-	short Index;
-	char * Code;
-	short Detectors_count;
-	DETECTOR ** Detectors;
-	short Conflict_count;
-	CONFLICT ** Conflicts;
+    /* Info */
+    short Index;
+    char * Code;
+    short Detectors_count;
+    DETECTOR ** Detectors;
+    short Conflict_count;
+    CONFLICT ** Conflicts;
 
 };
 

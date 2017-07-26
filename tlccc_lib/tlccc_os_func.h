@@ -36,13 +36,13 @@ void Outgoing_signal_set_desired(OUTGOING_SIGNAL * os, short state_desired, shor
 
 struct OUTGOING_SIGNAL_STRUCT
 {
-	/* Outgoing signal state */
-	short State_desired;
-	short State_real;
+    /* Outgoing signal state */
+    short State_desired;
+    short State_real;
 
-	/* Outgoing signal info */
-	char * Code;
-	short Index;
+    /* Outgoing signal info */
+    char * Code;
+    short Index;
 };
 
 #endif /* TLCCC_OSFUNC_H_INCLUDED */

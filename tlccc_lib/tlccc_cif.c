@@ -27,24 +27,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 void Set_GUS(SIGNALGROUP signalgroups[], short signalgroups_count, OUTGOING_SIGNAL os[], short os_count)
 {
-	int i;
-	for (i = 0; i < signalgroups_count; ++i)
-	{
-		switch (signalgroups[i].State_out)
-		{
-		case SO_RED:
-			CIF_GUS[signalgroups[i].Index] = CIF_ROOD;
-			break;
-		case SO_YELLOW:
-			CIF_GUS[signalgroups[i].Index] = CIF_GEEL;
-			break;
-		case SO_GREEN:
-			CIF_GUS[signalgroups[i].Index] = CIF_GROEN;
-			break;
-		}
-	}
-	for (i = 0; i < os_count; ++i)
-	{
-		CIF_GUS[os[i].Index] = os[i].State_desired;
-	}
+    int i;
+    for (i = 0; i < signalgroups_count; ++i)
+    {
+        switch (signalgroups[i].State_out)
+        {
+        case SO_RED:
+            CIF_GUS[signalgroups[i].Index] = CIF_ROOD;
+            break;
+        case SO_YELLOW:
+            CIF_GUS[signalgroups[i].Index] = CIF_GEEL;
+            break;
+        case SO_GREEN:
+            CIF_GUS[signalgroups[i].Index] = CIF_GROEN;
+            break;
+        }
+    }
+    for (i = 0; i < os_count; ++i)
+    {
+        CIF_GUS[os[i].Index] = os[i].State_desired;
+    }
 }

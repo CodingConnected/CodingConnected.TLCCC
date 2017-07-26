@@ -27,24 +27,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 void Parameter_init(PARAMETER * parameter, const char * code, short type, short setting)
 {
-	parameter->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
-	snprintf(parameter->Code, strlen(code) + 1, "%s", code);
+    parameter->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
+    snprintf(parameter->Code, strlen(code) + 1, "%s", code);
 
-	parameter->TimeType = type;
-	parameter->Setting = setting;
+    parameter->TimeType = type;
+    parameter->Setting = setting;
 }
 
 void Parameter_free(PARAMETER * parameter)
 {
-	if (parameter->Code != NULL)
-		free(parameter->Code);
+    if (parameter->Code != NULL)
+        free(parameter->Code);
 }
 
 void Parameters_free(PARAMETER prms[], short prm_count)
 {
-	int i;
-	for (i = 0; i < prm_count; ++i)
-	{
-		Parameter_free(&prms[i]);
-	}
+    int i;
+    for (i = 0; i < prm_count; ++i)
+    {
+        Parameter_free(&prms[i]);
+    }
 }

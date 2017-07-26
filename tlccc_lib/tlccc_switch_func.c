@@ -27,24 +27,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 void Switch_init(SWITCH * _switch, const char * code, short setting)
 {
-	_switch->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
-	snprintf(_switch->Code, strlen(code) + 1, "%s", code);
+    _switch->Code = (char *)malloc((strlen(code) + 1) * sizeof(char));
+    snprintf(_switch->Code, strlen(code) + 1, "%s", code);
 
-	_switch->Setting = setting;
+    _switch->Setting = setting;
 }
 
 
 void Switch_free(SWITCH * _switch)
 {
-	if (_switch->Code != NULL)
-		free(_switch->Code);
+    if (_switch->Code != NULL)
+        free(_switch->Code);
 }
 
 void Switches_free(SWITCH switches[], short switches_count)
 {
-	int i;
-	for (i = 0; i < switches_count; ++i)
-	{
-		Switch_free(&switches[i]);
-	}
+    int i;
+    for (i = 0; i < switches_count; ++i)
+    {
+        Switch_free(&switches[i]);
+    }
 }

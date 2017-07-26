@@ -34,14 +34,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 struct IS_STRUCT
 {
-	HRGN hRegion;
-	int iIndex;
+    HRGN hRegion;
+    int iIndex;
 };
 
 //extern "C"
 //{
-	#include "CIF_INC.h"
-	void DisplayParameters();
+    #include "CIF_INC.h"
+    void DisplayParameters();
 //}
 
 

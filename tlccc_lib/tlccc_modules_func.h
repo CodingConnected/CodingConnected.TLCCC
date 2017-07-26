@@ -43,31 +43,31 @@ void Modules_update_segment_display(MODULEMILL * modulemill, OUTGOING_SIGNAL os[
 
 struct MODULE_STRUCT
 {
-	/* State */
-	short Hold;
-	short AllRealised;
-	short Index;
-	short ModuleStart;
-	short IsActive;
+    /* State */
+    short Hold;
+    short AllRealised;
+    short Index;
+    short ModuleStart;
+    short IsActive;
 
-	/* Information */
-	char * Code;
-	SIGNALGROUP ** SignalGroups;
-	short SignalGroups_count;
+    /* Information */
+    char * Code;
+    SIGNALGROUP ** SignalGroups;
+    short SignalGroups_count;
 };
 
 struct MODULEMILL_STRUCT
 {
-	MODULE * ActiveModule;
-	short ActiveModule_index;
-	MODULE * WaitingModule;
-	MODULE ** Modules;
-	short WaitingModule_index;
-	short Modules_count;
-	short ModuleStart;
+    MODULE * ActiveModule;
+    short ActiveModule_index;
+    MODULE * WaitingModule;
+    MODULE ** Modules;
+    short WaitingModule_index;
+    short Modules_count;
+    short ModuleStart;
 
-	short CurrentCycleTime;
-	short CurrentModuleTime;
+    short CurrentCycleTime;
+    short CurrentModuleTime;
 };
 
 #endif /* TLCCC_MODULESFUNC_H_INCLUDED */

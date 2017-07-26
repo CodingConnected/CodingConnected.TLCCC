@@ -36,21 +36,21 @@ void Clock_update(CLOCK * clock);
 
 struct CLOCK_STRUCT
 {
-	short TSecCounter;
-	short TSecCounter_prev;
-	short SecCounter;
-	short SecCounter_prev;
-	short Year;
-	short Month;
-	short Day;
-	short DayType;
-	short Hour;
-	short Minute;
-	short Second;
+    short TSecCounter;
+    short TSecCounter_prev;
+    short SecCounter;
+    short SecCounter_prev;
+    short Year;
+    short Month;
+    short Day;
+    short DayType;
+    short Hour;
+    short Minute;
+    short Second;
 
-	short TE;
-	short TS;
-	short TM;
+    short TE;
+    short TS;
+    short TM;
 };
 
 #endif // TLCCC_KLOK_H_INCLUDED

@@ -34,14 +34,14 @@ void Parameters_free(PARAMETER prms[], short prm_count);
 
 struct PARAMETER_STRUCT
 {
-	/* Parameter fixed data*/
-	short TimeType;
+    /* Parameter fixed data*/
+    short TimeType;
 
-	/* Parameter state (read only) */
-	short Setting;
+    /* Parameter state (read only) */
+    short Setting;
 
-	/* Parameter info */
-	char * Code;
+    /* Parameter info */
+    char * Code;
 };
 
 #endif /* TLCCC_PRMFUNC_H_INCLUDED */

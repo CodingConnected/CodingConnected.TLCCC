@@ -95,7 +95,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define ML4 3
 #define MLMAX 4
 
-/* YATLCCLC includes */
+/* TLCCC includes */
 #include "tlccc_main.h"
 #include "tlccc_clock.h"
 #include "tlccc_sg_func.h"

@@ -36,22 +36,22 @@ void Timer_update(TIMER * timer, CLOCK * klok);
 
 struct TIMER_STRUCT
 {
-	/* Timer fixed data*/
-	short TimeType;
-	char * Code;
-	
-	/* Timer state (read only) */
-	short Maximum;   /* Timer max value */
-	short Current;   /* Timer current value */
-	short Remaining; /* Timer current value */
-	char Active;     /* Timer is active/inactive */
-	char Started;    /* Timer has started */
-	char Ended;      /* Timer has ended after reaching maximum */
+    /* Timer fixed data*/
+    short TimeType;
+    char * Code;
+    
+    /* Timer state (read only) */
+    short Maximum;   /* Timer max value */
+    short Current;   /* Timer current value */
+    short Remaining; /* Timer current value */
+    char Active;     /* Timer is active/inactive */
+    char Started;    /* Timer has started */
+    char Ended;      /* Timer has ended after reaching maximum */
 
-	/* Instructions */
-	char Start;    /* Set to TRUE to start the timer */
-	char Restart;  /* Set to TRUE to restart the timer */
-	char Stop;     /* Set to TRUE to stop (abort) the timer */
+    /* Instructions */
+    char Start;    /* Set to TRUE to start the timer */
+    char Restart;  /* Set to TRUE to restart the timer */
+    char Stop;     /* Set to TRUE to stop (abort) the timer */
 };
 
 #endif // TLCCC_TIMERFUNC_H_INCLUDED

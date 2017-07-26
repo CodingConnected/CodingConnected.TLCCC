@@ -40,26 +40,26 @@ void Detector_timers_update(DETECTOR * detector, CLOCK * klok);
 
 struct DETECTOR_STRUCT
 {
-	/* State */
-	TIMER Timer_Occ;
-	TIMER Timer_Gap;
-	TIMER Timer_ErrorHi;
-	TIMER Timer_ErrorLo;
-	short * CIF_IS_value;
-	short PresenceStart;
-	short Presence;
-	short PresenceEnd;
-	short Occupied;
-	short GapRunning;
+    /* State */
+    TIMER Timer_Occ;
+    TIMER Timer_Gap;
+    TIMER Timer_ErrorHi;
+    TIMER Timer_ErrorLo;
+    short * CIF_IS_value;
+    short PresenceStart;
+    short Presence;
+    short PresenceEnd;
+    short Occupied;
+    short GapRunning;
 
-	/* Settings */
-	short Type;
-	short Request;
-	short Extend;
+    /* Settings */
+    short Type;
+    short Request;
+    short Extend;
 
-	/* Info */
-	char * Code;
-	SIGNALGROUP * SignalGroup;
+    /* Info */
+    char * Code;
+    SIGNALGROUP * SignalGroup;
 };
 
 #define DET_EXT_NONE    0

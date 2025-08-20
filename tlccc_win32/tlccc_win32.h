@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2016 CodingConnected e. U., Menno van der Woude
+Copyright (C) 2016-2025 CodingConnected e. U., Menno van der Woude
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -31,20 +31,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 #include "BitmapperControl.h"
 
-
 struct IS_STRUCT
 {
     HRGN hRegion;
     int iIndex;
 };
 
-//extern "C"
-//{
-    #include "CIF_INC.h"
-    void DisplayParameters();
-//}
-
-
+#include "../tlccc_lib/CIF_INC.h"
+void DisplayParameters();
 
 #define ID_STATUSBAR 10001
 #define ID_TOOLBAR   10002

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2016 CodingConnected e. U., Menno van der Woude
+Copyright (C) 2016-2025 CodingConnected e. U., Menno van der Woude
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

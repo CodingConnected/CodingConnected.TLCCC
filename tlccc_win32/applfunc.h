@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2016 CodingConnected e. U., Menno van der Woude
+Copyright (C) 2016-2025 CodingConnected e. U., Menno van der Woude
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -28,10 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #include <Windows.h>
 #include <CommCtrl.h>
 
-//extern "C"
-//{
-    #include "tlccc_main.h" /* Also include CIF_INC.h */
-//}
+#include "../tlccc_lib/tlccc_main.h" /* Also include CIF_INC.h */
 
 #include "tlccc_win32.h"
 

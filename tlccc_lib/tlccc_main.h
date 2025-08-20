@@ -45,6 +45,13 @@ OTHER DEALINGS IN THE SOFTWARE.
     #define CIF_AANT_KLOK 9
     #define CIF_AANT_PARM1 PRMMAX
     #define CIF_AANT_PARM2 1
+
+    // dummy values to compile with CVN-C interface 6.2
+    #define CIF_MAX_MON_IBER 1
+    #define CIF_MAX_MON_UBER 1
+    #define CIF_MAX_RIS_UBER 1
+    #define CIF_MAX_FILE_UBER 1
+    #define CIF_MAX_FILEEXT 1
 #endif
 
 #include "CIF_INC.h"

@@ -86,7 +86,7 @@ s_int16 applicatieprogramma(s_int16 state)
         SignalGroups_update_conflicts(signalgroups, SGMAX);
         
         Modules_update_primary(&modulemill);
-        //Modules_update_alternative(&modulemill, signalgroups, FCMAX);
+        Modules_update_alternative(&modulemill, signalgroups, SGMAX);
         SignalGroups_state_update_ML(signalgroups, SGMAX, &CIF_GUSWIJZ);
         Modules_move_the_mill(&modulemill, signalgroups, SGMAX);
 

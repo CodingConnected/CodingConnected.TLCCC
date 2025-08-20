@@ -101,6 +101,11 @@
   <ItemGroup>
     <ResourceCompile Include="..\tlccc_win32\tlccc.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\tlccc_win32\bitmap1.bmp" />
+    <Image Include="..\tlccc_win32\icon.ico" />
+    <Image Include="..\tlccc_win32\icon_small.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
